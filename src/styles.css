@@ -1,0 +1,153 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Brand tokens */
+  --color-navy: var(--navy);
+  --color-navy-dark: var(--navy-dark);
+  --color-navy-soft: var(--navy-soft);
+  --color-orange: var(--orange);
+  --color-orange-soft: var(--orange-soft);
+  --color-surface: var(--surface);
+  --color-surface-blue: var(--surface-blue);
+  --color-ink: var(--ink);
+
+  --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 10px 30px -12px rgba(20, 42, 82, 0.18);
+  --shadow-glow: 0 20px 60px -20px rgba(249, 115, 22, 0.35);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Brand palette */
+  --navy: #233E78;
+  --navy-dark: #142A52;
+  --navy-soft: #EDF2FA;
+  --orange: #F97316;
+  --orange-soft: #FFF1E6;
+  --surface: #F5F7FA;
+  --surface-blue: #EDF2FA;
+  --ink: #172033;
+
+  --background: #FFFFFF;
+  --foreground: #172033;
+  --card: #FFFFFF;
+  --card-foreground: #172033;
+  --popover: #FFFFFF;
+  --popover-foreground: #172033;
+  --primary: #233E78;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EDF2FA;
+  --secondary-foreground: #142A52;
+  --muted: #F5F7FA;
+  --muted-foreground: #55627A;
+  --accent: #F97316;
+  --accent-foreground: #FFFFFF;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #FFFFFF;
+  --border: #E3E9F3;
+  --input: #E3E9F3;
+  --ring: #233E78;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  ::selection { background: var(--orange); color: white; }
+}
+
+@utility container-x {
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 80rem;
+  @media (min-width: 768px) { padding-inline: 2rem; }
+}
+
+@utility gradient-navy {
+  background-image: linear-gradient(135deg, #142A52 0%, #233E78 55%, #2E4E96 100%);
+}
+@utility gradient-orange {
+  background-image: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+}
+@utility text-gradient-brand {
+  background-image: linear-gradient(90deg, #233E78 0%, #F97316 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility card-hover {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-soft);
+    border-color: color-mix(in oklab, var(--orange) 40%, transparent);
+  }
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  &.is-visible { opacity: 1; transform: none; }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
