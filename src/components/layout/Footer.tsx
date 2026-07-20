@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, MessageCircle, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { SITE, whatsappLink, telLink, mailLink } from "@/data/site";
 import { CATEGORY_LABELS, servicesByCategory } from "@/data/services";
+import footerLogo from "@/assets/footer_logo.png";
 
 export function Footer() {
   return (
@@ -13,15 +14,14 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-navy-dark font-bold">
-                R
-              </span>
-              <div className="leading-tight">
-                <div className="text-sm font-bold text-white">Roshani IT Consultancy</div>
-                <div className="text-[10px] font-semibold uppercase tracking-wider text-orange">
-                  {SITE.tagline}
-                </div>
-              </div>
+              <img
+                src={footerLogo}
+                alt=""
+                className="block h-20 w-auto max-w-[11.5rem] shrink-0 object-contain sm:h-24 sm:max-w-[13.5rem]"
+                width={270}
+                height={135}
+                loading="lazy"
+              />
             </div>
             <p className="mt-5 max-w-md text-sm leading-relaxed">
               End-to-end business setup, taxation, tender and licensing support for Indian

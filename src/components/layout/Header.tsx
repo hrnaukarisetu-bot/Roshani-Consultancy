@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { SITE } from "@/data/site";
 import { CATEGORY_LABELS, SERVICES, servicesByCategory } from "@/data/services";
+import roshaniLogo from "@/assets/roshani_logo.png";
 
 type NavItem = { to: string; label: string; desktopLabel?: string; hasMega?: boolean };
 const NAV: NavItem[] = [
@@ -41,17 +42,16 @@ export function Header() {
         scrolled ? "bg-white/95 shadow-[0_6px_24px_-12px_rgba(20,42,82,0.18)] backdrop-blur" : "bg-white"
       }`}
     >
-      <div className="container-x flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label={SITE.name}>
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl gradient-navy text-white font-bold shadow-soft">
-            R
-          </span>
-          <span className="flex flex-col leading-tight">
-            <span className="text-sm font-bold text-navy-dark sm:text-[15px]">Roshani IT</span>
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-orange">
-              Consultancy
-            </span>
-          </span>
+      <div className="container-x flex h-20 items-center justify-between gap-4 md:h-24">
+        <Link to="/" className="flex shrink-0 items-center" aria-label={SITE.name}>
+          <img
+            src={roshaniLogo}
+            alt={SITE.name}
+            className="block h-16 w-auto max-w-[10rem] object-contain sm:h-[4.5rem] sm:max-w-[11.5rem] md:h-20 md:max-w-[13rem]"
+            width={270}
+            height={135}
+            loading="eager"
+          />
         </Link>
 
         {/* Desktop nav */}
