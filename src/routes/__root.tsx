@@ -1,4 +1,4 @@
-﻿import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
@@ -85,6 +85,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Start your business legally. Roshani IT Consultancy offers company registration, GST, tender filing, licenses & compliance for Indian startups and MSMEs.",
       },
       { name: "author", content: "Roshani IT Consultancy" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      {
+        name: "keywords",
+        content:
+          "company registration Akola, GST registration India, tender filing services, government license consultant, MSME registration, Roshani IT Consultancy",
+      },
+      { property: "og:locale", content: "en_IN" },
       { property: "og:site_name", content: "Roshani IT Consultancy" },
       { property: "og:type", content: "website" },
       { property: "og:title", content: "Roshani IT Consultancy | Company Registration, GST & Tender Services in Akola" },
@@ -94,10 +101,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Start your business legally. Roshani IT Consultancy offers company registration, GST, tender filing, licenses & compliance for Indian startups and MSMEs.",
       },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@RoshaniIT" },
       { name: "twitter:title", content: "Roshani IT Consultancy | Company Registration, GST & Tender Services in Akola" },
       { name: "twitter:description", content: "Start your business legally. Roshani IT Consultancy offers company registration, GST, tender filing, licenses & compliance for Indian startups and MSMEs." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1bcd0f1a-27c0-4882-8f6b-8f3cf2d67f84/id-preview-b5b131aa--ce797d9c-c95e-41f0-9511-98de8586b872.lovable.app-1783920416498.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1bcd0f1a-27c0-4882-8f6b-8f3cf2d67f84/id-preview-b5b131aa--ce797d9c-c95e-41f0-9511-98de8586b872.lovable.app-1783920416498.png" },
+      { property: "og:image", content: "/roshani_logo.png" },
+      { name: "twitter:image", content: "/roshani_logo.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -107,7 +115,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/vite.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "shortcut icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
     scripts: [
       {
@@ -116,7 +127,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
           name: "Roshani IT Consultancy",
-          image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+          image: "/roshani_logo.png",
           telephone: "+91-8975008429",
           email: "sale.roshanibmc@gmail.com",
           address: {
@@ -128,6 +139,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             addressCountry: "IN",
           },
           areaServed: "IN",
+          priceRange: "$$",
+          openingHours: "Mo-Sa 10:00-19:00",
+          sameAs: [],
+          serviceType: [
+            "Company Registration",
+            "GST Registration and Filing",
+            "Tender Filing Services",
+            "Government License Consulting",
+            "MSME Registration",
+          ],
         }),
       },
     ],
