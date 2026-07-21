@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
@@ -24,6 +24,16 @@ export const Route = createFileRoute("/services")({
 });
 
 function Services() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+
+  if (pathname !== "/services") {
+    return <Outlet />;
+  }
+
+  return <ServicesIndex />;
+}
+
+function ServicesIndex() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<ServiceCategory | "all">("all");
 

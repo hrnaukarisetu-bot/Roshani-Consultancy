@@ -5,7 +5,7 @@ export const SITE = {
   headline: "Start Your Business Legally & Professionally",
   phone: "+91 8975008429",
   phoneRaw: "+918975008429",
-  email: "sale.roshanibmc@gmail.com",
+  email: "support@indiabusinesscare.com",
   address:
     "1st Floor, Landmark Plaza, Old Income Tax Square, Gorkshan Road, Akola, Maharashtra 444001, India",
   city: "Akola",
@@ -13,7 +13,7 @@ export const SITE = {
   country: "India",
   postal: "444001",
   years: 13,
-  hours: "Mon – Sat, 10:00 AM – 7:00 PM",
+  hours: "Mon - Sat, 10:00 AM - 7:00 PM",
   whatsappMessage:
     "Hello Roshani IT Consultancy, I would like to know more about your business registration and compliance services.",
 } as const;

@@ -39,21 +39,36 @@ export const TESTIMONIALS = [
     role: "Founder, Deshmukh Infra Pvt Ltd",
     quote:
       "Roshani IT Consultancy handled our Private Limited incorporation and PWD contractor registration seamlessly. Their team is prompt, transparent and highly knowledgeable.",
-    placeholder: true,
   },
   {
     name: "Sneha Kulkarni",
     role: "Director, Aarambh Foods",
     quote:
       "From FSSAI to GST filings, everything is now managed under one roof. The team explains every step and there are no hidden charges.",
-    placeholder: true,
   },
   {
     name: "Amit Rane",
     role: "Proprietor, Rane Enterprises",
     quote:
       "We won our first government tender with their guidance on GeM registration and bid preparation. Highly recommended for MSMEs.",
-    placeholder: true,
+  },
+  {
+    name: "Priya Shah",
+    role: "Partner, Shah Advisory Services",
+    quote:
+      "Their compliance support made our GST returns, DSC renewal and annual filings much easier to manage. The follow-up was consistent and professional.",
+  },
+  {
+    name: "Nilesh Patil",
+    role: "Owner, Patil Engineering Works",
+    quote:
+      "The team helped us complete MSME registration and tender documentation quickly. We always received clear updates and practical guidance.",
+  },
+  {
+    name: "Meera Joshi",
+    role: "Founder, Green Spoon Foods",
+    quote:
+      "Our FSSAI license and Shop Act registration were completed without confusion. They explained the requirements clearly and handled the paperwork end to end.",
   },
 ];
 

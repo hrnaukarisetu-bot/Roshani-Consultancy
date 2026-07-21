@@ -3,8 +3,8 @@ import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
 import { SectionHeading } from "@/components/SectionHeading";
-import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
-import { SITE, telLink, mailLink, whatsappLink } from "@/data/site";
+import { Mail, MapPin, Clock } from "lucide-react";
+import { SITE, mailLink } from "@/data/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Get in touch with Roshani IT Consultancy in Akola for company registration, GST, tender and licensing services. Call, WhatsApp or email us.",
+          "Get in touch with Roshani IT Consultancy in Akola for company registration, GST, tender and licensing services. Email us or fill in the enquiry form.",
       },
       { property: "og:url", content: "/contact" },
     ],
@@ -24,8 +24,6 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const cards = [
-    { icon: Phone, title: "Call Us", value: SITE.phone, href: telLink() },
-    { icon: MessageCircle, title: "WhatsApp", value: SITE.phone, href: whatsappLink() },
     { icon: Mail, title: "Email", value: SITE.email, href: mailLink() },
     { icon: Clock, title: "Office Hours", value: SITE.hours },
   ];
@@ -35,13 +33,13 @@ function Contact() {
       <PageHero
         eyebrow="Contact Us"
         title="We're here to help you start & grow"
-        description="Call, message or fill in the form — an expert will get back to you within one business day."
+        description="Email us or fill in the form - an expert will get back to you within one business day."
         breadcrumbs={[{ label: "Contact Us" }]}
       />
 
       <section className="bg-white py-16">
         <div className="container-x">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             {cards.map((c) => {
               const inner = (
                 <>
@@ -85,7 +83,7 @@ function Contact() {
               </div>
               <div className="mt-6 overflow-hidden rounded-2xl border border-border">
                 <iframe
-                  title="Roshani IT Consultancy — Akola Office"
+                  title="Roshani IT Consultancy - Akola Office"
                   src="https://www.google.com/maps?q=Akola,Maharashtra,India&output=embed"
                   className="h-72 w-full"
                   loading="lazy"

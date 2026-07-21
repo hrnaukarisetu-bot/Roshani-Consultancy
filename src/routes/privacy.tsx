@@ -28,7 +28,7 @@ export const Route = createFileRoute("/privacy")({
           <h2 className="pt-4 text-xl font-bold text-navy-dark">Data Security</h2>
           <p>We use reasonable technical and organisational measures to protect your information.</p>
           <h2 className="pt-4 text-xl font-bold text-navy-dark">Contact</h2>
-          <p>For questions, email sale.roshanibmc@gmail.com.</p>
+          <p>For questions, email support@indiabusinesscare.com.</p>
         </div>
       </section>
     </SiteLayout>

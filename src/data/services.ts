@@ -479,8 +479,8 @@ export const SERVICES: Service[] = [
     ],
   },
   {
-    slug: "income-tax-return",
-    title: "Income Tax Return",
+    slug: "income-tax-return-filing",
+    title: "Income Tax Return Filing",
     short:
       "ITR filing for individuals, professionals, firms and companies.",
     category: "gst-taxation",
@@ -687,7 +687,7 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export const getService = (slug: string) => SERVICES.find((s) => s.slug === slug);
+export const getService = (slug: string) => SERVICES.find((s) => s.slug === (SERVICE_SLUG_ALIASES[slug] || slug));
 export const servicesByCategory = (c: ServiceCategory) =>
   SERVICES.filter((s) => s.category === c);
 
@@ -703,3 +703,7 @@ export const INDUSTRIES = [
   { name: "Service Businesses", icon: Users },
   { name: "Local Enterprises", icon: Landmark },
 ];
+
+export const SERVICE_SLUG_ALIASES: Record<string, string> = {
+  "income-tax-return": "income-tax-return-filing",
+};

@@ -25,7 +25,7 @@ export function Footer() {
             </div>
             <p className="mt-5 max-w-md text-sm leading-relaxed">
               End-to-end business setup, taxation, tender and licensing support for Indian
-              startups, MSMEs, contractors and enterprises — under one trusted roof.
+              startups, MSMEs, contractors and enterprises - under one trusted roof.
             </p>
             <ul className="mt-6 space-y-3 text-sm">
               <li className="flex items-start gap-3">
@@ -112,7 +112,10 @@ export function Footer() {
               )}
             </nav>
             <p className="text-xs text-white/60">
-              © 2026 Roshani IT Consultancy. All Rights Reserved.
+              {"\u00A9"} 2026 All Rights Reserved By India Business care and Designed By {" "}
+              <a href="https://webakoof.com" target="_blank" rel="noreferrer" className="font-semibold text-white hover:text-orange">
+                Webakoof
+              </a>
             </p>
           </div>
         </div>

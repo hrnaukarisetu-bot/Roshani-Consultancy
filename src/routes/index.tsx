@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
+  ArrowLeft,
   ArrowRight,
   CheckCircle2,
   Shield,
@@ -7,7 +8,7 @@ import {
   Users,
   Sparkles,
   FileCheck2,
-  Search,
+  Quote,
   FileSignature,
   BadgeCheck,
 } from "lucide-react";
@@ -17,10 +18,12 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { Counter } from "@/components/Counter";
 import { CTASection } from "@/components/CTASection";
 import { Reveal } from "@/components/Reveal";
-import { SERVICES, servicesByCategory, INDUSTRIES } from "@/data/services";
+import { getService, servicesByCategory, INDUSTRIES } from "@/data/services";
 import { FAQS, TESTIMONIALS } from "@/data/content";
 import { SITE } from "@/data/site";
-import { useState } from "react";
+import roshaniBanner from "@/assets/roshani_banner.png";
+import officeImage from "@/assets/office.png";
+import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -68,18 +71,19 @@ function Home() {
     { icon: Sparkles, label: "End-to-End Support" },
     { icon: Clock, label: "Secure & Confidential" },
   ];
-  const featured = SERVICES.filter((s) =>
-    [
-      "private-limited-company",
-      "gem-registration",
-      "gst-registration",
-      "msme-udyam-registration",
-      "digital-signature-certificate",
-      "iso-certification",
-      "trademark-registration",
-      "gst-return-filing",
-    ].includes(s.slug),
-  );
+  const homepageServiceSlugs = [
+    "private-limited-company",
+    "gem-registration",
+    "digital-signature-certificate",
+    "gst-registration",
+    "gst-return-filing",
+    "msme-udyam-registration",
+    "iso-certification",
+    "trademark-registration",
+  ];
+  const featured = homepageServiceSlugs
+    .map((slug) => getService(slug))
+    .filter((service) => Boolean(service));
 
   return (
     <SiteLayout>
@@ -110,7 +114,7 @@ function Home() {
             </h1>
             <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
               Complete support for company registration, GST, government tenders, licenses,
-              taxation and regulatory compliance — under one roof for Indian startups and MSMEs.
+              taxation and regulatory compliance â€” under one roof for Indian startups and MSMEs.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -142,8 +146,8 @@ function Home() {
           <div className="relative">
             <div className="relative overflow-hidden rounded-3xl border border-border bg-white shadow-soft">
               <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1200&q=80"
-                alt="Professional business consultant ready to advise Indian startups and MSMEs"
+                src={roshaniBanner}
+                alt="Roshani Consultancy business registration and compliance support"
                 className="h-[420px] w-full object-cover object-top md:h-[520px]"
                 loading="eager"
               />
@@ -222,8 +226,8 @@ function Home() {
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80"
-              alt="Consultancy team meeting"
+              src={officeImage}
+              alt="Roshani Consultancy office consultation meeting"
               className="h-[440px] w-full rounded-3xl object-cover shadow-soft"
             />
             <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-white p-5 shadow-soft md:block">
@@ -306,7 +310,7 @@ function Home() {
       <CategoryPreview
         eyebrow="Company Registration"
         title="Register the right entity for your goals"
-        description="From solo founders to multi-partner ventures — pick the structure that fits."
+        description="From solo founders to multi-partner ventures â€” pick the structure that fits."
         categorySlug="company-registration"
       />
 
@@ -363,7 +367,7 @@ function Home() {
       <CategoryPreview
         eyebrow="Government Licenses"
         title="Get the right licenses for your industry"
-        description="MSME, Shop Act, FSSAI, IEC, ISO and Trademark — done right, first time."
+        description="MSME, Shop Act, FSSAI, IEC, ISO and Trademark â€” done right, first time."
         categorySlug="government-licenses"
       />
 
@@ -425,7 +429,7 @@ function Home() {
         <div className="container-x grid gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
           {[
             { end: SITE.years, suffix: "+", label: "Years Experience" },
-            { end: 500, suffix: "+", label: "Business Consultations*" },
+            { end: 500, suffix: "+", label: "Business Consultations" },
             { end: 20, suffix: "+", label: "Registration Services" },
             { end: 100, suffix: "%", label: "End-to-End Support" },
           ].map((s) => (
@@ -437,9 +441,6 @@ function Home() {
             </div>
           ))}
         </div>
-        <p className="container-x mt-6 text-center text-[11px] text-white/50">
-          *Placeholder metrics — replace with verified numbers.
-        </p>
       </section>
 
       {/* TESTIMONIALS */}
@@ -453,7 +454,7 @@ function Home() {
               align="left"
               eyebrow="FAQs"
               title={<>Answers to common questions</>}
-              description="Can't find what you're looking for? Reach out — our team is happy to help."
+              description="Can't find what you're looking for? Reach out â€” our team is happy to help."
             />
             <Link
               to="/contact"
@@ -518,42 +519,85 @@ function CategoryPreview({
 }
 
 function TestimonialSlider() {
-  const [i, setI] = useState(0);
-  const t = TESTIMONIALS[i];
+  const [page, setPage] = useState(0);
+  const cardsPerPage = 3;
+  const pageCount = Math.ceil(TESTIMONIALS.length / cardsPerPage);
+  const visibleTestimonials = TESTIMONIALS.slice(
+    page * cardsPerPage,
+    page * cardsPerPage + cardsPerPage,
+  );
+
+  const goToPrevious = () =>
+    setPage((current) => (current === 0 ? pageCount - 1 : current - 1));
+  const goToNext = () =>
+    setPage((current) => (current === pageCount - 1 ? 0 : current + 1));
+
+  useEffect(() => {
+    if (pageCount <= 1) return;
+
+    const timer = window.setInterval(() => {
+      setPage((current) => (current === pageCount - 1 ? 0 : current + 1));
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, [pageCount]);
+
   return (
     <section className="bg-white py-20">
       <div className="container-x">
-        <SectionHeading
-          eyebrow="Client Voices"
-          title={<>What our clients say</>}
-          description="Sample testimonials — placeholder content, editable in the source."
-        />
-        <div className="mx-auto mt-12 max-w-3xl">
-          <div className="relative rounded-3xl border border-border bg-white p-8 shadow-soft sm:p-12">
-            <div className="absolute -top-5 left-8 grid h-10 w-10 place-items-center rounded-full gradient-orange text-white">
-              <Search className="h-4 w-4" />
-            </div>
-            <p className="text-lg leading-relaxed text-navy-dark sm:text-xl">"{t.quote}"</p>
-            <div className="mt-6 flex items-center justify-between">
-              <div>
-                <div className="font-semibold text-navy-dark">{t.name}</div>
-                <div className="text-xs text-muted-foreground">{t.role}</div>
+        <SectionHeading eyebrow="Client Voices" title={<>What our clients say</>} />
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {visibleTestimonials.map((testimonial) => (
+            <article
+              key={`${testimonial.name}-${testimonial.role}`}
+              className="relative flex min-h-[280px] flex-col rounded-3xl border border-border bg-white p-7 shadow-soft"
+            >
+              <div className="grid h-10 w-10 place-items-center rounded-full gradient-orange text-white">
+                <Quote className="h-5 w-5" />
               </div>
-              <div className="flex gap-2">
-                {TESTIMONIALS.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setI(idx)}
-                    aria-label={`Testimonial ${idx + 1}`}
-                    className={`h-2.5 w-2.5 rounded-full transition ${
-                      idx === i ? "w-6 bg-orange" : "bg-navy-soft"
-                    }`}
-                  />
-                ))}
+              <p className="mt-6 flex-1 text-base leading-relaxed text-navy-dark">
+                {testimonial.quote}
+              </p>
+              <div className="mt-6 border-t border-border pt-5">
+                <div className="font-semibold text-navy-dark">{testimonial.name}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{testimonial.role}</div>
               </div>
-            </div>
-          </div>
+            </article>
+          ))}
         </div>
+        {pageCount > 1 && (
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={goToPrevious}
+              aria-label="Previous testimonials"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white text-navy-dark shadow-sm transition hover:border-orange hover:text-orange"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <div className="flex gap-2">
+              {Array.from({ length: pageCount }).map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setPage(idx)}
+                  aria-label={`Testimonials page ${idx + 1}`}
+                  className={`h-2.5 rounded-full transition ${
+                    idx === page ? "w-6 bg-orange" : "w-2.5 bg-navy-soft"
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={goToNext}
+              aria-label="Next testimonials"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white text-navy-dark shadow-sm transition hover:border-orange hover:text-orange"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

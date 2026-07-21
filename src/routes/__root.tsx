@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -129,7 +130,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "Roshani IT Consultancy",
           image: "/roshani_logo.png",
           telephone: "+91-8975008429",
-          email: "sale.roshanibmc@gmail.com",
+          email: "support@indiabusinesscare.com",
           address: {
             "@type": "PostalAddress",
             streetAddress: "1st Floor, Landmark Plaza, Old Income Tax Square, Gorkshan Road",
@@ -175,6 +176,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

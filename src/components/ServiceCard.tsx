@@ -13,11 +13,11 @@ export function ServiceCard({
   description: string;
   href: string;
 }) {
-  return (
-    <Link
-      to={href as any}
-      className="group card-hover relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm"
-    >
+  const serviceSlug = href.match(/^\/services\/([^/?#]+)/)?.[1];
+  const className =
+    "group card-hover relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm";
+  const content = (
+    <>
       <span className="absolute inset-x-0 top-0 h-1 gradient-orange opacity-0 transition-opacity group-hover:opacity-100" />
       <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-navy-soft text-navy transition-colors group-hover:bg-orange group-hover:text-white">
         <Icon className="h-7 w-7" />
@@ -30,6 +30,25 @@ export function ServiceCard({
         Learn more
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </span>
+    </>
+  );
+
+  if (serviceSlug) {
+    return (
+      <Link
+        to="/services/$slug"
+        params={{ slug: serviceSlug }}
+        aria-label={`Learn more about ${title}`}
+        className={className}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <Link to={href as any} aria-label={`Learn more about ${title}`} className={className}>
+      {content}
     </Link>
   );
 }

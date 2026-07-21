@@ -21,7 +21,7 @@ export function FloatingActions() {
         aria-label={`Chat with ${SITE.name} on WhatsApp`}
         className="fixed bottom-5 right-5 z-40 grid h-14 w-14 place-items-center overflow-hidden rounded-full shadow-glow transition hover:scale-105"
       >
-        <img src={whatsappIcon} alt="" className="h-full w-full object-contain" aria-hidden="true" />
+        <img src={whatsappIcon} alt="" className="h-full w-full scale-110 object-cover" aria-hidden="true" />
       </a>
       <a
         href={telLink()}

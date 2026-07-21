@@ -1,281 +1,326 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
-import { CheckCircle2, ArrowRight, FileText, ClipboardList, Sparkles, MessageCircle } from "lucide-react";
+import type React from "react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  CheckCircle2,
+  ClipboardList,
+  Clock3,
+  FileText,
+  MessageCircle,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
-import { PageHero } from "@/components/PageHero";
-import { CTASection } from "@/components/CTASection";
 import { ContactForm } from "@/components/ContactForm";
 import { ServiceCard } from "@/components/ServiceCard";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
-  CATEGORY_LABELS,
-  getService,
-  SERVICES,
-  servicesByCategory,
-} from "@/data/services";
-import { whatsappLink } from "@/data/site";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { CATEGORY_LABELS, getService, servicesByCategory, type Service } from "@/data/services";
+import { getServiceDetail, type ServiceDetailContent } from "@/data/serviceDetails";
+import { SITE, telLink } from "@/data/site";
 
-import type { Service } from "@/data/services";
+const feeNote = "Government fees and professional charges may vary based on the application type.";
+const documentNote = "Exact document requirements may vary depending on the applicant type, business structure and applicable authority.";
 
 export const Route = createFileRoute("/services/$slug")({
-  loader: ({ params }): { service: Service } => {
+  loader: ({ params }): { detail: ServiceDetailContent } => {
     const service = getService(params.slug);
     if (!service) throw notFound();
-    return { service };
+    return { detail: getServiceDetail(service) };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return {
-        meta: [
-          { title: "Service Not Found | Roshani IT Consultancy" },
-          { name: "robots", content: "noindex" },
-        ],
-      };
+      return { meta: [{ title: "Service Not Found | Roshani IT Consultancy" }, { name: "robots", content: "noindex" }] };
     }
-    const s = loaderData.service;
-    const url = `/services/${s.slug}`;
+    const { detail } = loaderData;
+    const url = `/services/${detail.slug}`;
+    const faqs = buildFaqs(detail);
     return {
       meta: [
-        { title: `${s.title} | Roshani IT Consultancy` },
-        { name: "description", content: s.short },
-        { property: "og:title", content: s.title },
-        { property: "og:description", content: s.short },
+        { title: detail.metaTitle },
+        { name: "description", content: detail.metaDescription },
+        { name: "keywords", content: detail.keywords.join(", ") },
+        { property: "og:title", content: detail.metaTitle },
+        { property: "og:description", content: detail.metaDescription },
         { property: "og:url", content: url },
+        { property: "og:image", content: "/roshani_logo.png" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: detail.metaTitle },
+        { name: "twitter:description", content: detail.metaDescription },
+        { name: "twitter:image", content: "/roshani_logo.png" },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: s.title,
-            description: s.short,
-            provider: {
-              "@type": "ProfessionalService",
-              name: "Roshani IT Consultancy",
-            },
-            areaServed: "IN",
-          }),
-        },
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: s.faqs.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          }),
-        },
+        { type: "application/ld+json", children: JSON.stringify(breadcrumbSchema(detail)) },
+        { type: "application/ld+json", children: JSON.stringify(serviceSchema(detail)) },
+        { type: "application/ld+json", children: JSON.stringify(faqSchema(faqs)) },
       ],
     };
   },
   component: ServiceDetail,
   notFoundComponent: () => (
     <SiteLayout>
-      <PageHero title="Service not found" breadcrumbs={[{ label: "Services", to: "/services" }, { label: "Not found" }]} />
+      <main className="bg-surface py-20">
+        <div className="container-x text-center">
+          <p className="text-sm font-semibold uppercase tracking-wider text-orange">404</p>
+          <h1 className="mt-3 text-4xl font-bold text-navy-dark">Service not found</h1>
+          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">The service page you are looking for is unavailable or may have moved.</p>
+          <Link to="/services" className="mt-8 inline-flex rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">View all services</Link>
+        </div>
+      </main>
     </SiteLayout>
   ),
 });
 
 function ServiceDetail() {
-  const { service } = Route.useLoaderData() as { service: Service };
-  const related = SERVICES.filter(
-    (s) => s.category === service.category && s.slug !== service.slug,
-  ).slice(0, 3);
+  const { detail } = Route.useLoaderData() as { detail: ServiceDetailContent };
+  const service = getService(detail.slug);
+  if (!service) return null;
   const Icon = service.icon;
+  const related = relatedServices(service, detail);
+  const faqs = buildFaqs(detail);
 
   return (
     <SiteLayout>
-      <PageHero
-        eyebrow={CATEGORY_LABELS[service.category]}
-        title={service.title}
-        description={service.short}
-        breadcrumbs={[
-          { label: "Services", to: "/services" },
-          { label: service.title },
-        ]}
-      />
+      <main>
+        <section className="bg-surface-blue/60 py-4">
+          <div className="container-x"><Breadcrumb service={service} /></div>
+        </section>
 
-      <section className="bg-white py-16">
-        <div className="container-x grid gap-10 lg:grid-cols-[1fr_380px] lg:items-start">
-          <div className="space-y-10">
-            <div className="rounded-2xl border border-border bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-4">
-                <div className="grid h-14 w-14 place-items-center rounded-xl gradient-orange text-white">
-                  <Icon className="h-7 w-7" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-orange">
-                    Overview
-                  </div>
-                  <h2 className="text-2xl font-bold text-navy-dark">{service.title}</h2>
-                </div>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {service.short} Suitable for <strong className="text-navy-dark">{service.suitableFor}</strong>
-              </p>
-            </div>
-
-            <InfoBlock icon={Sparkles} title="Key Benefits" items={service.benefits} />
-
-            {service.eligibility && service.eligibility.length > 0 && (
-              <InfoBlock
-                icon={ClipboardList}
-                title="Who Should Apply / Eligibility"
-                items={service.eligibility}
-              />
-            )}
-
-            <InfoBlock icon={FileText} title="Documents Required" items={service.documents} />
-
+        <section className="relative overflow-hidden bg-white py-14 md:py-20">
+          <div className="container-x grid gap-10 lg:grid-cols-[1fr_380px] lg:items-center">
             <div>
-              <h3 className="text-xl font-bold text-navy-dark">Application Process</h3>
-              <ol className="mt-4 space-y-3">
-                {service.process.map((step, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 rounded-xl border border-border bg-white p-4"
-                  >
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-navy text-xs font-bold text-white">
-                      {i + 1}
-                    </span>
-                    <span className="text-sm text-navy-dark">{step}</span>
-                  </li>
-                ))}
-              </ol>
-              <p className="mt-3 text-xs text-muted-foreground">
-                Timeline disclaimer: Approval timelines depend on the concerned government
-                department. We do not guarantee approval.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-border bg-navy-soft p-6">
-              <h3 className="text-lg font-bold text-navy-dark">
-                Why choose Roshani IT Consultancy?
-              </h3>
-              <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-                {[
-                  "13+ years of expertise",
-                  "CA & CS supervised filings",
-                  "Transparent process & pricing",
-                  "Local support, pan-India delivery",
-                ].map((x) => (
-                  <li key={x} className="flex items-start gap-2 text-sm text-navy-dark">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-orange" /> {x}
-                  </li>
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange/25 bg-orange-soft px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange">{CATEGORY_LABELS[service.category]}</div>
+              <h1 className="mt-5 max-w-3xl text-4xl font-bold leading-tight text-navy-dark sm:text-5xl">{detail.title} in India</h1>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">{detail.shortDescription}</p>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+                {["Expert Assisted Process", "Transparent Guidance", "End-to-End Support"].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm font-semibold text-navy-dark"><CheckCircle2 className="h-4 w-4 text-orange" />{item}</li>
                 ))}
               </ul>
-            </div>
-
-            {service.faqs.length > 0 && (
-              <div>
-                <h3 className="text-xl font-bold text-navy-dark">Frequently Asked Questions</h3>
-                <Accordion type="single" collapsible className="mt-4">
-                  {service.faqs.map((f, i) => (
-                    <AccordionItem key={i} value={`f-${i}`}>
-                      <AccordionTrigger className="text-left text-sm font-semibold text-navy-dark hover:no-underline">
-                        {f.q}
-                      </AccordionTrigger>
-                      <AccordionContent className="text-sm text-muted-foreground">
-                        {f.a}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href="#service-enquiry" className="inline-flex items-center justify-center gap-2 rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:brightness-110">Get Expert Consultation <ArrowRight className="h-4 w-4" /></a>
+                <a href="#documents" className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3 text-sm font-semibold text-navy transition hover:border-navy hover:bg-navy-soft">View Required Documents</a>
               </div>
-            )}
+            </div>
+            <aside className="rounded-2xl border border-border bg-white p-6 shadow-soft">
+              <div className="grid h-14 w-14 place-items-center rounded-xl bg-navy-soft text-navy"><Icon className="h-7 w-7" /></div>
+              <h2 className="mt-5 text-xl font-bold text-navy-dark">Speak with a consultant</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Understand eligibility, documents, realistic timeline and the next filing step for {detail.shortTitle}.</p>
+              <div className="mt-5 grid gap-2 text-sm text-navy-dark">
+                <a href={telLink()} className="rounded-lg border border-border px-4 py-3 font-semibold hover:border-orange">Call {SITE.phone}</a>
+                <a href={serviceWhatsapp(detail)} target="_blank" rel="noreferrer" className="rounded-lg bg-[#25D366] px-4 py-3 font-semibold text-white">Chat on WhatsApp</a>
+              </div>
+            </aside>
           </div>
+        </section>
 
-          <aside className="lg:sticky lg:top-24">
-            <div className="rounded-2xl border border-border bg-white p-6 shadow-sm">
-              <div className="text-xs font-semibold uppercase tracking-wider text-orange">
-                Get in Touch
-              </div>
-              <h3 className="mt-1 text-xl font-bold text-navy-dark">Request Consultation</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Tell us a bit about your business and we'll get back within one business day.
-              </p>
-              <div className="mt-5">
-                <ContactForm defaultService={service.title} />
-              </div>
-              <a
-                href={whatsappLink()}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white"
-              >
-                <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
-              </a>
-            </div>
-          </aside>
-        </div>
-      </section>
+        <section className="bg-surface py-8">
+          <div className="container-x grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <QuickInfo icon={BadgeCheck} label="Service Type" value={CATEGORY_LABELS[service.category]} />
+            <QuickInfo icon={Clock3} label="Estimated Timeline" value={detail.estimatedTimeline} />
+            <QuickInfo icon={Users} label="Ideal For" value={detail.whoShouldApply[0] || service.suitableFor} />
+            <QuickInfo icon={ShieldCheck} label="Support" value={detail.supportType} />
+          </div>
+          <p className="container-x mt-4 text-xs text-muted-foreground">Government processing timelines may vary depending on document accuracy, portal status and authority review.</p>
+        </section>
 
-      {related.length > 0 && (
-        <section className="bg-surface py-16">
-          <div className="container-x">
-            <div className="mb-8 flex items-center justify-between">
-              <h3 className="text-2xl font-bold text-navy-dark">Related Services</h3>
-              <Link
-                to="/services"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-orange hover:text-navy"
-              >
-                All services <ArrowRight className="h-4 w-4" />
-              </Link>
+        <section className="bg-white py-16 md:py-20">
+          <div className="container-x grid gap-10 lg:grid-cols-[1fr_360px] lg:items-start">
+            <div>
+              <SectionEyebrow>Service Overview</SectionEyebrow>
+              <h2 className="mt-2 text-3xl font-bold text-navy-dark">What is {detail.title}?</h2>
+              <div className="mt-5 space-y-4 text-sm leading-7 text-muted-foreground sm:text-base">{detail.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((s) => (
-                <ServiceCard
-                  key={s.slug}
-                  icon={s.icon}
-                  title={s.title}
-                  description={s.short}
-                  href={`/services/${s.slug}`}
-                />
-              ))}
+            <div className="rounded-2xl border border-border bg-navy-soft p-6">
+              <h3 className="text-lg font-bold text-navy-dark">Why choose this service?</h3>
+              <ul className="mt-4 space-y-3">{detail.benefits.slice(0, 4).map((item) => <CheckItem key={item.title}>{item.title}</CheckItem>)}</ul>
             </div>
           </div>
         </section>
-      )}
 
-      <CTASection />
+        <section className="bg-surface py-16 md:py-20">
+          <div className="container-x">
+            <SectionHeader eyebrow="Benefits" title="Key benefits" description="Clear, practical advantages for Indian businesses choosing this service." />
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{detail.benefits.slice(0, 6).map((benefit) => <BenefitCard key={benefit.title} title={benefit.title} description={benefit.description} />)}</div>
+          </div>
+        </section>
+
+        <section className="bg-white py-16 md:py-20">
+          <div className="container-x grid gap-8 lg:grid-cols-2">
+            <InfoPanel eyebrow="Who should apply" title="Suitable business types" items={detail.whoShouldApply} />
+            <InfoPanel eyebrow="Eligibility" title="Basic conditions" items={detail.eligibility} />
+          </div>
+        </section>
+
+        <section id="documents" className="scroll-mt-28 bg-surface py-16 md:py-20">
+          <div className="container-x">
+            <SectionHeader eyebrow="Checklist" title="Documents required" description={documentNote} />
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
+              {detail.documentGroups.map((group) => (
+                <div key={group.title} className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+                  <div className="mb-4 flex items-center gap-2 text-navy-dark"><FileText className="h-5 w-5 text-orange" /><h3 className="font-bold">{group.title}</h3></div>
+                  <ul className="space-y-3">{group.items.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul>
+                </div>
+              ))}
+            </div>
+            <a href="#service-enquiry" className="mt-8 inline-flex rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Get the Exact Document Checklist</a>
+          </div>
+        </section>
+
+        <section className="bg-white py-16 md:py-20">
+          <div className="container-x">
+            <SectionHeader eyebrow="Process" title="Registration / filing process" description="A guided process focused on accurate documentation and timely follow-up. Authority approvals remain with the relevant department or portal." />
+            <ol className="mt-10 grid gap-4 lg:grid-cols-2">
+              {detail.processSteps.slice(0, 7).map((step, index) => (
+                <li key={step.title} className="rounded-2xl border border-border bg-white p-5 shadow-sm">
+                  <div className="flex gap-4">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy text-sm font-bold text-white">{index + 1}</span>
+                    <div><h3 className="font-bold text-navy-dark">{step.title}</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.description}</p></div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="bg-surface py-16 md:py-20">
+          <div className="container-x grid gap-8 lg:grid-cols-2">
+            <div>
+              <SectionEyebrow>Deliverables</SectionEyebrow>
+              <h2 className="mt-2 text-3xl font-bold text-navy-dark">What you will receive</h2>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">{detail.deliverables.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul>
+            </div>
+            <div className="rounded-2xl bg-navy p-7 text-white shadow-soft">
+              <SectionEyebrow light>Roshani Consultancy</SectionEyebrow>
+              <h2 className="mt-2 text-3xl font-bold">Why choose us?</h2>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {["Expert Guidance", "Transparent Process", "Proper Documentation Support", "Timely Status Updates", "End-to-End Coordination", "Post-Service Assistance"].map((item) => <div key={item} className="rounded-xl bg-white/10 p-4 text-sm font-semibold text-white">{item}</div>)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-16 md:py-20">
+          <div className="container-x grid gap-10 lg:grid-cols-[1fr_380px] lg:items-start">
+            <div>
+              <SectionHeader eyebrow="FAQs" title="Frequently asked questions" description={`Answers to common questions about ${detail.title}.`} />
+              <Accordion type="single" collapsible className="mt-8 rounded-2xl border border-border bg-white px-4 shadow-sm">
+                {faqs.map((faq, index) => (
+                  <AccordionItem key={faq.q} value={`faq-${index}`}>
+                    <AccordionTrigger className="text-left text-sm font-semibold text-navy-dark hover:no-underline">{faq.q}</AccordionTrigger>
+                    <AccordionContent className="text-sm leading-relaxed text-muted-foreground">{faq.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+            <aside id="service-enquiry" className="scroll-mt-28 lg:sticky lg:top-28">
+              <div className="rounded-2xl border border-border bg-white p-5 shadow-soft">
+                <h2 className="text-xl font-bold text-navy-dark">Request a callback</h2>
+                <p className="mt-2 text-sm text-muted-foreground">Share your details and connect through WhatsApp while the enquiry API is pending backend integration.</p>
+                <div className="mt-5"><ContactForm defaultService={service.title} /></div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        {related.length > 0 && (
+          <section className="bg-surface py-16 md:py-20">
+            <div className="container-x">
+              <SectionHeader eyebrow="Related" title="Related services" description="Useful next services often requested with this filing." />
+              <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{related.map((item) => <ServiceCard key={item.slug} icon={item.icon} title={item.title} description={item.short} href={`/services/${item.slug}`} />)}</div>
+            </div>
+          </section>
+        )}
+
+        <section className="gradient-navy py-16 text-white md:py-20">
+          <div className="container-x text-center">
+            <h2 className="text-3xl font-bold sm:text-4xl">Need Help With {detail.title}?</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-white/80">Speak with our consultant to understand eligibility, documents, timeline and the next steps.</p>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <a href="#service-enquiry" className="inline-flex items-center justify-center rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Request a Callback</a>
+              <a href={serviceWhatsapp(detail)} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy"><MessageCircle className="h-4 w-4" /> Chat on WhatsApp</a>
+            </div>
+          </div>
+        </section>
+      </main>
     </SiteLayout>
   );
 }
 
-function InfoBlock({
-  icon: Icon,
-  title,
-  items,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  items: string[];
-}) {
+function Breadcrumb({ service }: { service: Service }) {
   return (
-    <div>
-      <div className="flex items-center gap-2">
-        <Icon className="h-5 w-5 text-orange" />
-        <h3 className="text-xl font-bold text-navy-dark">{title}</h3>
-      </div>
-      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-        {items.map((x) => (
-          <li key={x} className="flex items-start gap-2 rounded-lg bg-white p-3 text-sm text-navy-dark ring-1 ring-border">
-            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-orange" /> {x}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <nav aria-label="Breadcrumb" className="overflow-x-auto text-sm">
+      <ol className="flex min-w-max items-center gap-2 text-muted-foreground">
+        <li><Link to="/" className="hover:text-navy">Home</Link></li><li>/</li>
+        <li><Link to="/services" className="hover:text-navy">Services</Link></li><li>/</li>
+        <li><span>{CATEGORY_LABELS[service.category]}</span></li><li>/</li>
+        <li aria-current="page" className="font-semibold text-navy-dark">{service.title}</li>
+      </ol>
+    </nav>
   );
 }
 
-// Also export sample export used implicitly? none needed
-export {};
+function QuickInfo({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
+  return <div className="rounded-2xl border border-border bg-white p-5 shadow-sm"><Icon className="h-5 w-5 text-orange" /><p className="mt-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">{label}</p><p className="mt-1 text-sm font-semibold leading-relaxed text-navy-dark">{value}</p></div>;
+}
+
+function SectionEyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+  return <p className={`text-xs font-bold uppercase tracking-wider ${light ? "text-orange-soft" : "text-orange"}`}>{children}</p>;
+}
+
+function SectionHeader({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) {
+  return <div className="max-w-3xl"><SectionEyebrow>{eyebrow}</SectionEyebrow><h2 className="mt-2 text-3xl font-bold text-navy-dark">{title}</h2>{description && <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{description}</p>}</div>;
+}
+
+function CheckItem({ children }: { children: React.ReactNode }) {
+  return <li className="flex items-start gap-2 text-sm leading-relaxed text-navy-dark"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-orange" /> <span>{children}</span></li>;
+}
+
+function InfoPanel({ eyebrow, title, items }: { eyebrow: string; title: string; items: string[] }) {
+  return <div className="rounded-2xl border border-border bg-white p-6 shadow-sm"><SectionEyebrow>{eyebrow}</SectionEyebrow><h2 className="mt-2 text-2xl font-bold text-navy-dark">{title}</h2><ul className="mt-5 space-y-3">{items.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul></div>;
+}
+
+function BenefitCard({ title, description }: { title: string; description: string }) {
+  return <div className="group rounded-2xl border border-border bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-soft"><div className="grid h-12 w-12 place-items-center rounded-xl bg-navy-soft text-navy transition group-hover:scale-105 group-hover:bg-orange group-hover:text-white"><Sparkles className="h-6 w-6" /></div><h3 className="mt-5 text-lg font-bold text-navy-dark">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p></div>;
+}
+
+function buildFaqs(detail: ServiceDetailContent) {
+  const generated = [
+    { q: `Which documents are required for ${detail.title}?`, a: documentNote },
+    { q: `How long does ${detail.title} take?`, a: `${detail.estimatedTimeline}. Government processing timelines may vary.` },
+    { q: "Is professional consultation necessary?", a: "It is not mandatory in every case, but professional review helps reduce avoidable errors, missing documents and incorrect service selection." },
+    { q: "Are government fees included?", a: feeNote },
+    { q: "Can Roshani Consultancy assist with future compliance?", a: "Yes. We can guide you on renewals, return filings, registrations and related compliance after the service is complete." },
+  ];
+  return [...detail.faqs, ...generated].filter((item, index, arr) => arr.findIndex((x) => x.q === item.q) === index).slice(0, 8);
+}
+
+function relatedServices(service: Service, detail: ServiceDetailContent) {
+  const slugs = detail.relatedServices.length ? detail.relatedServices : servicesByCategory(service.category).filter((s) => s.slug !== service.slug).map((s) => s.slug);
+  return slugs.map((slug) => getService(slug)).filter((item): item is Service => Boolean(item)).slice(0, 3);
+}
+
+function serviceWhatsapp(detail: ServiceDetailContent) {
+  const message = `Hello Roshani IT Consultancy, I would like consultation for ${detail.title}. Please guide me on eligibility, documents and timeline.`;
+  return `https://wa.me/${SITE.phoneRaw.replace("+", "")}?text=${encodeURIComponent(message)}`;
+}
+
+function breadcrumbSchema(detail: ServiceDetailContent) {
+  return { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "/services" },
+    { "@type": "ListItem", position: 3, name: CATEGORY_LABELS[detail.category], item: "/services" },
+    { "@type": "ListItem", position: 4, name: detail.title, item: `/services/${detail.slug}` },
+  ] };
+}
+
+function serviceSchema(detail: ServiceDetailContent) {
+  return { "@context": "https://schema.org", "@type": "Service", name: detail.title, description: detail.metaDescription, provider: { "@type": "ProfessionalService", name: SITE.name, telephone: SITE.phone, email: SITE.email }, areaServed: "IN", serviceType: CATEGORY_LABELS[detail.category] };
+}
+
+function faqSchema(items: Array<{ q: string; a: string }>) {
+  return { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: items.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) };
+}
