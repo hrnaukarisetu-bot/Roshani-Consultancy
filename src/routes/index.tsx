@@ -281,7 +281,11 @@ function Home() {
           <SectionHeading
             eyebrow="Why Choose Us"
             title={<>Trusted expertise, delivered locally & across India</>}
-            description="A dedicated team that combines professional guidance with a client-first approach."
+            description={
+              <span className="text-orange">
+                A dedicated team that combines professional guidance with a client-first approach.
+              </span>
+            }
           />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
