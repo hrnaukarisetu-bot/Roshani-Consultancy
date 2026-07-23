@@ -18,7 +18,7 @@ const schema = z.object({
 type FormState = Record<string, string>;
 type Status = "idle" | "loading" | "success";
 
-export function ContactForm({ defaultService }: { defaultService?: string }) {
+export function ContactForm({ defaultService, showIntro = false }: { defaultService?: string; showIntro?: boolean }) {
   const serviceOptions = useMemo(() => SERVICES.map((service) => service.title), []);
   const [state, setState] = useState<FormState>({ service: defaultService || "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -62,9 +62,15 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
   };
 
   return (
-    <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-white p-6 shadow-sm sm:p-8" aria-label="Service inquiry form" noValidate>
+    <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-white p-5 shadow-soft sm:p-6 lg:p-7" aria-label="Service inquiry form" noValidate>
+      {showIntro && (
+        <div className="mb-5">
+          <h2 className="text-xl font-bold text-navy-dark">Get Expert Assistance</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Share your details and our team will respond with the next steps for this service.</p>
+        </div>
+      )}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" value={state.website || ""} onChange={(e) => set("website", e.target.value)} className="hidden" aria-hidden />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2">
         <Field label="Full Name" name="name" value={state.name || ""} error={errors.name} onChange={set} />
         <Field label="WhatsApp Number" name="phone" type="tel" value={state.phone || ""} error={errors.phone} onChange={set} />
         <Field label="Email Address" name="email" type="email" value={state.email || ""} error={errors.email} onChange={set} />
@@ -73,7 +79,7 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
       </div>
       <div className="mt-4">
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-navy-dark">Message <span className="text-orange">*</span></label>
-        <textarea id="message" name="message" rows={4} value={state.message || ""} onChange={(e) => set("message", e.target.value)} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} className="w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition focus:border-navy focus:ring-2 focus:ring-navy/20" />
+        <textarea id="message" name="message" rows={3} value={state.message || ""} onChange={(e) => set("message", e.target.value)} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} className="w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition focus:border-navy focus:ring-2 focus:ring-navy/20" />
         {errors.message && <ErrorText id="message-error">{errors.message}</ErrorText>}
       </div>
       {status === "success" && (
@@ -82,7 +88,7 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
           <a href={serviceWhatsappLink(selectedService)} target="_blank" rel="noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> Continue on WhatsApp</a>
         </div>
       )}
-      <button type="submit" disabled={status === "loading"} className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy-dark focus:outline-none focus:ring-2 focus:ring-navy/30 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto">
+      <button type="submit" disabled={status === "loading"} className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy-dark focus:outline-none focus:ring-2 focus:ring-navy/30 disabled:cursor-not-allowed disabled:opacity-70">
         {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
         {status === "loading" ? "Submitting..." : "Submit Inquiry"}
       </button>
@@ -102,7 +108,7 @@ function Field({ label, name, value, error, onChange, type = "text" }: { label: 
 
 function SelectField({ label, name, value, error, onChange, options, locked = false }: { label: string; name: string; value: string; error?: string; onChange: (name: string, value: string) => void; options: string[]; locked?: boolean }) {
   return (
-    <div className="sm:col-span-2">
+    <div className="lg:col-span-2">
       <label htmlFor={name} className="mb-1.5 block text-sm font-medium text-navy-dark">{label} <span className="text-orange">*</span></label>
       <select id={name} name={name} value={value} onChange={(e) => onChange(name, e.target.value)} disabled={locked} aria-invalid={Boolean(error)} aria-describedby={error ? `${name}-error` : undefined} className="w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition focus:border-navy focus:ring-2 focus:ring-navy/20 disabled:cursor-not-allowed disabled:opacity-80">
         <option value="">Select</option>

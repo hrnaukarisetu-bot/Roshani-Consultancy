@@ -4,10 +4,8 @@ import {
   ArrowRight,
   BadgeCheck,
   CheckCircle2,
-  ClipboardList,
   Clock3,
   FileText,
-  MessageCircle,
   ShieldCheck,
   Sparkles,
   Users,
@@ -19,7 +17,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CATEGORY_LABELS, getService, servicesByCategory, type Service } from "@/data/services";
 import { getServiceDetail, type ServiceDetailContent } from "@/data/serviceDetails";
-import { SITE, absoluteUrl, serviceWhatsappLink, telLink } from "@/data/site";
+import { SITE, absoluteUrl } from "@/data/site";
 
 const feeNote = "Government fees and professional charges may vary based on the application type.";
 const documentNote = "Exact document requirements may vary depending on the applicant type, business structure and applicable authority.";
@@ -85,7 +83,6 @@ function ServiceDetail() {
   const { detail } = Route.useLoaderData() as { detail: ServiceDetailContent };
   const service = getService(detail.slug);
   if (!service) return null;
-  const Icon = service.icon;
   const related = relatedServices(service, detail);
   const faqs = buildFaqs(detail);
 
@@ -97,7 +94,7 @@ function ServiceDetail() {
         </section>
 
         <section className="relative overflow-hidden bg-white py-14 md:py-20">
-          <div className="container-x grid gap-10 lg:grid-cols-[1fr_380px] lg:items-center">
+          <div className="container-x grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(430px,0.8fr)] lg:items-start xl:grid-cols-[minmax(0,1.35fr)_minmax(500px,0.9fr)]">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-orange/25 bg-orange-soft px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange">{CATEGORY_LABELS[service.category]}</div>
               <h1 className="mt-5 max-w-3xl text-3xl font-bold leading-tight text-navy-dark sm:text-5xl">{detail.title} in India</h1>
@@ -108,18 +105,12 @@ function ServiceDetail() {
                 ))}
               </ul>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href="#service-enquiry" className="inline-flex items-center justify-center gap-2 rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:brightness-110">Get Expert Consultation <ArrowRight className="h-4 w-4" /></a>
+                <a href="#service-inquiry-form" className="inline-flex items-center justify-center gap-2 rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:brightness-110">Get Expert Consultation <ArrowRight className="h-4 w-4" /></a>
                 <a href="#documents" className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3 text-sm font-semibold text-navy transition hover:border-navy hover:bg-navy-soft">View Required Documents</a>
               </div>
             </div>
-            <aside className="rounded-2xl border border-border bg-white p-6 shadow-soft">
-              <div className="grid h-14 w-14 place-items-center rounded-xl bg-navy-soft text-navy"><Icon className="h-7 w-7" /></div>
-              <h2 className="mt-5 text-xl font-bold text-navy-dark">Speak with a consultant</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Understand eligibility, documents, realistic timeline and the next filing step for {detail.shortTitle}.</p>
-              <div className="mt-5 grid gap-2 text-sm text-navy-dark">
-                <a href={telLink()} className="rounded-lg border border-border px-4 py-3 font-semibold hover:border-orange">Call {SITE.phone}</a>
-                <a href={serviceWhatsappLink(detail.title)} target="_blank" rel="noreferrer" className="rounded-lg bg-[#25D366] px-4 py-3 font-semibold text-white">Chat on WhatsApp</a>
-              </div>
+            <aside id="service-inquiry-form" className="scroll-mt-28">
+              <ContactForm defaultService={service.title} showIntro />
             </aside>
           </div>
         </section>
@@ -173,7 +164,7 @@ function ServiceDetail() {
                 </div>
               ))}
             </div>
-            <a href="#service-enquiry" className="mt-8 inline-flex min-h-11 items-center justify-center rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Get the Exact Document Checklist</a>
+            <a href="#service-inquiry-form" className="mt-8 inline-flex min-h-11 items-center justify-center rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Get the Exact Document Checklist</a>
           </div>
         </section>
 
@@ -211,25 +202,16 @@ function ServiceDetail() {
         </section>
 
         <section className="bg-white py-16 md:py-20">
-          <div className="container-x grid gap-10 lg:grid-cols-[1fr_380px] lg:items-start">
-            <div>
-              <SectionHeader eyebrow="FAQs" title="Frequently asked questions" description={`Answers to common questions about ${detail.title}.`} />
-              <Accordion type="single" collapsible className="mt-8 rounded-2xl border border-border bg-white px-4 shadow-sm">
-                {faqs.map((faq, index) => (
-                  <AccordionItem key={faq.q} value={`faq-${index}`}>
-                    <AccordionTrigger className="text-left text-sm font-semibold text-navy-dark hover:no-underline">{faq.q}</AccordionTrigger>
-                    <AccordionContent className="text-sm leading-relaxed text-muted-foreground">{faq.a}</AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-            <aside id="service-enquiry" className="scroll-mt-28 lg:sticky lg:top-28">
-              <div className="rounded-2xl border border-border bg-white p-5 shadow-soft">
-                <h2 className="text-xl font-bold text-navy-dark">Request a callback</h2>
-                <p className="mt-2 text-sm text-muted-foreground">Share your details and our team will respond with the next steps for this service.</p>
-                <div className="mt-5"><ContactForm defaultService={service.title} /></div>
-              </div>
-            </aside>
+          <div className="container-x">
+            <SectionHeader eyebrow="FAQs" title="Frequently asked questions" description={`Answers to common questions about ${detail.title}.`} />
+            <Accordion type="single" collapsible className="mt-8 rounded-2xl border border-border bg-white px-4 shadow-sm">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={faq.q} value={`faq-${index}`}>
+                  <AccordionTrigger className="text-left text-sm font-semibold text-navy-dark hover:no-underline">{faq.q}</AccordionTrigger>
+                  <AccordionContent className="text-sm leading-relaxed text-muted-foreground">{faq.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </section>
 
@@ -246,9 +228,8 @@ function ServiceDetail() {
           <div className="container-x text-center">
             <h2 className="text-3xl font-bold sm:text-4xl">Need Help With {detail.title}?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/80">Speak with our consultant to understand eligibility, documents, timeline and the next steps.</p>
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <a href="#service-enquiry" className="inline-flex items-center justify-center rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Request a Callback</a>
-              <a href={serviceWhatsappLink(detail.title)} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy"><MessageCircle className="h-4 w-4" /> Chat on WhatsApp</a>
+            <div className="mt-8 flex justify-center">
+              <a href="#service-inquiry-form" className="inline-flex items-center justify-center rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Request a Callback</a>
             </div>
           </div>
         </section>
