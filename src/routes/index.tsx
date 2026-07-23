@@ -15,10 +15,11 @@ import {
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
+import { OurClients } from "@/components/OurClients";
 import { Counter } from "@/components/Counter";
 import { CTASection } from "@/components/CTASection";
 import { Reveal } from "@/components/Reveal";
-import { getService, servicesByCategory, INDUSTRIES } from "@/data/services";
+import { getService, servicesByCategory, INDUSTRIES, type ServiceCategory } from "@/data/services";
 import { FAQS, TESTIMONIALS } from "@/data/content";
 import { SITE } from "@/data/site";
 import roshaniBanner from "@/assets/roshani_banner.png";
@@ -148,7 +149,7 @@ function Home() {
               <img
                 src={roshaniBanner}
                 alt="Roshani Consultancy business registration and compliance support"
-                className="h-[420px] w-full object-cover object-top md:h-[520px]"
+                className="h-[360px] w-full object-cover object-top sm:h-[420px] md:h-[520px]"
                 loading="eager"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-dark/70 to-transparent p-6 text-white">
@@ -228,7 +229,7 @@ function Home() {
             <img
               src={officeImage}
               alt="Roshani Consultancy office consultation meeting"
-              className="h-[440px] w-full rounded-3xl object-cover shadow-soft"
+              className="h-[320px] w-full rounded-3xl object-cover shadow-soft sm:h-[440px]"
             />
             <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-white p-5 shadow-soft md:block">
               <div className="text-3xl font-bold text-orange">
@@ -248,7 +249,7 @@ function Home() {
                   Building <span className="text-orange">Bharat's businesses</span>, one registration at a time.
                 </>
               }
-              description="Roshani IT Consultancy supports new entrepreneurs, established businesses, startups and MSMEs with legal registration, compliance, tender filing, government licensing and taxation services."
+              description="Roshani IT Consultancy supports new entrepreneurs, established businesses, startups and MSMEs with legal registration, compliance, tender filing, license and government certification and taxation services."
             />
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
@@ -274,6 +275,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <OurClients />
 
       {/* WHY CHOOSE US */}
       <section className="relative bg-navy-soft py-20">
@@ -318,6 +321,14 @@ function Home() {
         categorySlug="company-registration"
       />
 
+      <CategoryPreview
+        eyebrow="NGO Services"
+        title="Build credible social-impact organizations"
+        description="Society, 12A, 80G, CSR, NGO Darpan and related registrations for non-profit readiness."
+        categorySlug="ngo-services"
+        surface
+      />
+
       {/* TENDER */}
       <section className="bg-white py-20">
         <div className="container-x grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -325,7 +336,7 @@ function Home() {
             <img
               src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80"
               alt="Government tender documentation and contracts"
-              className="h-[420px] w-full rounded-3xl object-cover shadow-soft"
+              className="h-[320px] w-full rounded-3xl object-cover shadow-soft sm:h-[420px]"
             />
           </div>
           <div>
@@ -335,7 +346,7 @@ function Home() {
               title={<>Win more government contracts with expert support</>}
               description="From GeM registration to bid preparation, we manage the entire tender lifecycle."
             />
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {servicesByCategory("tender-services").map((s) => (
                 <Link
                   key={s.slug}
@@ -369,10 +380,23 @@ function Home() {
         surface
       />
       <CategoryPreview
-        eyebrow="Government Licenses"
+        eyebrow="License & Government Certification"
         title="Get the right licenses for your industry"
-        description="MSME, Shop Act, FSSAI, IEC, ISO and Trademark â€” done right, first time."
+        description="MSME, Shop Act, FSSAI, IEC, APEDA, professional tax and labour registrations done right, first time."
         categorySlug="government-licenses"
+      />
+      <CategoryPreview
+        eyebrow="ISO Services"
+        title="Strengthen credibility with the right ISO standard"
+        description="Quality, safety, environment, information security and other ISO certifications with guided documentation."
+        categorySlug="iso-services"
+        surface
+      />
+      <CategoryPreview
+        eyebrow="Trademark Services"
+        title="Protect and present your brand professionally"
+        description="Trademark filing, renewal and logo design support for growing Indian brands."
+        categorySlug="trademark-services"
       />
 
       {/* PROCESS */}
@@ -497,7 +521,7 @@ function CategoryPreview({
   eyebrow: string;
   title: string;
   description: string;
-  categorySlug: "company-registration" | "tender-services" | "gst-taxation" | "government-licenses";
+  categorySlug: ServiceCategory;
   surface?: boolean;
 }) {
   const items = servicesByCategory(categorySlug);

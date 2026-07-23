@@ -1,5 +1,6 @@
 export const SITE = {
   name: "Roshani IT Consultancy",
+  url: "https://roshani-consultancy.vercel.app",
   short: "Roshani IT",
   tagline: "Helping Business & Startup MSME Build the Bharat",
   headline: "Start Your Business Legally & Professionally",
@@ -23,5 +24,14 @@ export const whatsappLink = () =>
     SITE.whatsappMessage,
   )}`;
 
+export const serviceWhatsappLink = (serviceName: string) => {
+  const message = `Hello Roshani Consultancy, I am interested in ${serviceName}. Please share more details.`;
+  return `https://wa.me/${SITE.phoneRaw.replace("+", "")}?text=${encodeURIComponent(message)}`;
+};
+
 export const telLink = () => `tel:${SITE.phoneRaw}`;
 export const mailLink = () => `mailto:${SITE.email}`;
+export const absoluteUrl = (path: string) => {
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${SITE.url}${path.startsWith("/") ? path : `/${path}`}`;
+};

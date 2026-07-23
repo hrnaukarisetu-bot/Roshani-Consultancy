@@ -87,14 +87,17 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  html { overflow-x: hidden; scroll-behavior: smooth; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    min-width: 0;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0; }
+  img, svg, video, canvas { max-width: 100%; }
   ::selection { background: var(--orange); color: white; }
 }
 
@@ -134,6 +137,12 @@
   &.is-visible { opacity: 1; transform: none; }
 }
 
+@keyframes client-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 0.625rem)); }
+}
+.client-marquee { animation: client-marquee 34s linear infinite; }
+.client-marquee:hover { animation-play-state: paused; }
 @keyframes float-slow {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-14px); }
@@ -150,4 +159,5 @@
     transition-duration: 0.001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .client-marquee { animation: none; }
 }

@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SITE, absoluteUrl } from "@/data/site";
 
 function NotFoundComponent() {
   return (
@@ -90,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "keywords",
         content:
-          "company registration Akola, GST registration India, tender filing services, government license consultant, MSME registration, Roshani IT Consultancy",
+          "company registration Akola, GST registration India, tender filing services, license and government certification consultant, MSME registration, Roshani IT Consultancy",
       },
       { property: "og:locale", content: "en_IN" },
       { property: "og:site_name", content: "Roshani IT Consultancy" },
@@ -105,8 +106,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@RoshaniIT" },
       { name: "twitter:title", content: "Roshani IT Consultancy | Company Registration, GST & Tender Services in Akola" },
       { name: "twitter:description", content: "Start your business legally. Roshani IT Consultancy offers company registration, GST, tender filing, licenses & compliance for Indian startups and MSMEs." },
-      { property: "og:image", content: "/roshani_logo.png" },
-      { name: "twitter:image", content: "/roshani_logo.png" },
+      { property: "og:url", content: SITE.url },
+      { property: "og:image", content: absoluteUrl("/roshani_logo.png") },
+      { property: "og:image:alt", content: `${SITE.name} logo` },
+      { name: "twitter:image", content: absoluteUrl("/roshani_logo.png") },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -127,8 +130,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
-          name: "Roshani IT Consultancy",
-          image: "/roshani_logo.png",
+          name: SITE.name,
+          image: absoluteUrl("/roshani_logo.png"),
+          url: SITE.url,
           telephone: "+91-8975008429",
           email: "support@indiabusinesscare.com",
           address: {
@@ -147,7 +151,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "Company Registration",
             "GST Registration and Filing",
             "Tender Filing Services",
-            "Government License Consulting",
+            "License & Government Certification Consulting",
             "MSME Registration",
           ],
         }),

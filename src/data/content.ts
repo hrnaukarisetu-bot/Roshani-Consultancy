@@ -161,7 +161,7 @@ export const RESOURCES: Resource[] = [
     title: "Documents Required for MSME / Udyam Registration",
     excerpt:
       "Everything a micro, small or medium enterprise needs to register under Udyam.",
-    category: "Government Licenses",
+    category: "License & Government Certification",
     readTime: "4 min read",
     cover:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
@@ -180,7 +180,7 @@ export const RESOURCES: Resource[] = [
     title: "How to Apply for an FSSAI Food License",
     excerpt:
       "Basic, State and Central FSSAI licenses — eligibility, documents and turnaround times.",
-    category: "Government Licenses",
+    category: "License & Government Certification",
     readTime: "5 min read",
     cover:
       "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
@@ -199,7 +199,7 @@ export const RESOURCES: Resource[] = [
     title: "Why Trademark Registration Matters for Every Brand",
     excerpt:
       "How a registered trademark protects your brand, builds trust and adds long-term business value.",
-    category: "Government Licenses",
+    category: "License & Government Certification",
     readTime: "5 min read",
     cover:
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
@@ -233,7 +233,7 @@ export const RESOURCES: Resource[] = [
     title: "IEC (Import Export Code) Registration Guide",
     excerpt:
       "Everything you need to obtain a 10-digit IEC from DGFT and start importing or exporting legally.",
-    category: "Government Licenses",
+    category: "License & Government Certification",
     readTime: "4 min read",
     cover:
       "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?auto=format&fit=crop&w=1200&q=80",

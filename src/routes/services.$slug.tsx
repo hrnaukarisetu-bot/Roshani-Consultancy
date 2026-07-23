@@ -19,7 +19,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CATEGORY_LABELS, getService, servicesByCategory, type Service } from "@/data/services";
 import { getServiceDetail, type ServiceDetailContent } from "@/data/serviceDetails";
-import { SITE, telLink } from "@/data/site";
+import { SITE, absoluteUrl, serviceWhatsappLink, telLink } from "@/data/site";
 
 const feeNote = "Government fees and professional charges may vary based on the application type.";
 const documentNote = "Exact document requirements may vary depending on the applicant type, business structure and applicable authority.";
@@ -35,25 +35,32 @@ export const Route = createFileRoute("/services/$slug")({
       return { meta: [{ title: "Service Not Found | Roshani IT Consultancy" }, { name: "robots", content: "noindex" }] };
     }
     const { detail } = loaderData;
-    const url = `/services/${detail.slug}`;
+    const path = `/services/${detail.slug}`;
+    const url = absoluteUrl(path);
+    const image = absoluteUrl("/roshani_logo.png");
     const faqs = buildFaqs(detail);
     return {
       meta: [
         { title: detail.metaTitle },
         { name: "description", content: detail.metaDescription },
         { name: "keywords", content: detail.keywords.join(", ") },
+        { name: "robots", content: "index, follow, max-image-preview:large" },
+        { property: "og:type", content: "website" },
+        { property: "og:site_name", content: SITE.name },
         { property: "og:title", content: detail.metaTitle },
         { property: "og:description", content: detail.metaDescription },
         { property: "og:url", content: url },
-        { property: "og:image", content: "/roshani_logo.png" },
+        { property: "og:image", content: image },
+        { property: "og:image:alt", content: `${detail.title} service by ${SITE.name}` },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: detail.metaTitle },
         { name: "twitter:description", content: detail.metaDescription },
-        { name: "twitter:image", content: "/roshani_logo.png" },
+        { name: "twitter:image", content: image },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
         { type: "application/ld+json", children: JSON.stringify(breadcrumbSchema(detail)) },
+        { type: "application/ld+json", children: JSON.stringify(webPageSchema(detail, url, image)) },
         { type: "application/ld+json", children: JSON.stringify(serviceSchema(detail)) },
         { type: "application/ld+json", children: JSON.stringify(faqSchema(faqs)) },
       ],
@@ -67,7 +74,7 @@ export const Route = createFileRoute("/services/$slug")({
           <p className="text-sm font-semibold uppercase tracking-wider text-orange">404</p>
           <h1 className="mt-3 text-4xl font-bold text-navy-dark">Service not found</h1>
           <p className="mx-auto mt-3 max-w-xl text-muted-foreground">The service page you are looking for is unavailable or may have moved.</p>
-          <Link to="/services" className="mt-8 inline-flex rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">View all services</Link>
+          <Link to="/services" className="mt-8 inline-flex min-h-11 items-center justify-center rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">View all services</Link>
         </div>
       </main>
     </SiteLayout>
@@ -93,7 +100,7 @@ function ServiceDetail() {
           <div className="container-x grid gap-10 lg:grid-cols-[1fr_380px] lg:items-center">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-orange/25 bg-orange-soft px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange">{CATEGORY_LABELS[service.category]}</div>
-              <h1 className="mt-5 max-w-3xl text-4xl font-bold leading-tight text-navy-dark sm:text-5xl">{detail.title} in India</h1>
+              <h1 className="mt-5 max-w-3xl text-3xl font-bold leading-tight text-navy-dark sm:text-5xl">{detail.title} in India</h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">{detail.shortDescription}</p>
               <ul className="mt-6 grid gap-3 sm:grid-cols-3">
                 {["Expert Assisted Process", "Transparent Guidance", "End-to-End Support"].map((item) => (
@@ -111,7 +118,7 @@ function ServiceDetail() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Understand eligibility, documents, realistic timeline and the next filing step for {detail.shortTitle}.</p>
               <div className="mt-5 grid gap-2 text-sm text-navy-dark">
                 <a href={telLink()} className="rounded-lg border border-border px-4 py-3 font-semibold hover:border-orange">Call {SITE.phone}</a>
-                <a href={serviceWhatsapp(detail)} target="_blank" rel="noreferrer" className="rounded-lg bg-[#25D366] px-4 py-3 font-semibold text-white">Chat on WhatsApp</a>
+                <a href={serviceWhatsappLink(detail.title)} target="_blank" rel="noreferrer" className="rounded-lg bg-[#25D366] px-4 py-3 font-semibold text-white">Chat on WhatsApp</a>
               </div>
             </aside>
           </div>
@@ -166,7 +173,7 @@ function ServiceDetail() {
                 </div>
               ))}
             </div>
-            <a href="#service-enquiry" className="mt-8 inline-flex rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Get the Exact Document Checklist</a>
+            <a href="#service-enquiry" className="mt-8 inline-flex min-h-11 items-center justify-center rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Get the Exact Document Checklist</a>
           </div>
         </section>
 
@@ -219,7 +226,7 @@ function ServiceDetail() {
             <aside id="service-enquiry" className="scroll-mt-28 lg:sticky lg:top-28">
               <div className="rounded-2xl border border-border bg-white p-5 shadow-soft">
                 <h2 className="text-xl font-bold text-navy-dark">Request a callback</h2>
-                <p className="mt-2 text-sm text-muted-foreground">Share your details and connect through WhatsApp while the enquiry API is pending backend integration.</p>
+                <p className="mt-2 text-sm text-muted-foreground">Share your details and our team will respond with the next steps for this service.</p>
                 <div className="mt-5"><ContactForm defaultService={service.title} /></div>
               </div>
             </aside>
@@ -241,7 +248,7 @@ function ServiceDetail() {
             <p className="mx-auto mt-4 max-w-2xl text-white/80">Speak with our consultant to understand eligibility, documents, timeline and the next steps.</p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <a href="#service-enquiry" className="inline-flex items-center justify-center rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white">Request a Callback</a>
-              <a href={serviceWhatsapp(detail)} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy"><MessageCircle className="h-4 w-4" /> Chat on WhatsApp</a>
+              <a href={serviceWhatsappLink(detail.title)} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy"><MessageCircle className="h-4 w-4" /> Chat on WhatsApp</a>
             </div>
           </div>
         </section>
@@ -252,7 +259,7 @@ function ServiceDetail() {
 
 function Breadcrumb({ service }: { service: Service }) {
   return (
-    <nav aria-label="Breadcrumb" className="overflow-x-auto text-sm">
+    <nav aria-label="Breadcrumb" className="max-w-full overflow-x-auto text-sm">
       <ol className="flex min-w-max items-center gap-2 text-muted-foreground">
         <li><Link to="/" className="hover:text-navy">Home</Link></li><li>/</li>
         <li><Link to="/services" className="hover:text-navy">Services</Link></li><li>/</li>
@@ -303,22 +310,30 @@ function relatedServices(service: Service, detail: ServiceDetailContent) {
   return slugs.map((slug) => getService(slug)).filter((item): item is Service => Boolean(item)).slice(0, 3);
 }
 
-function serviceWhatsapp(detail: ServiceDetailContent) {
-  const message = `Hello Roshani IT Consultancy, I would like consultation for ${detail.title}. Please guide me on eligibility, documents and timeline.`;
-  return `https://wa.me/${SITE.phoneRaw.replace("+", "")}?text=${encodeURIComponent(message)}`;
-}
 
 function breadcrumbSchema(detail: ServiceDetailContent) {
   return { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-    { "@type": "ListItem", position: 2, name: "Services", item: "/services" },
-    { "@type": "ListItem", position: 3, name: CATEGORY_LABELS[detail.category], item: "/services" },
-    { "@type": "ListItem", position: 4, name: detail.title, item: `/services/${detail.slug}` },
+    { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+    { "@type": "ListItem", position: 2, name: "Services", item: absoluteUrl("/services") },
+    { "@type": "ListItem", position: 3, name: CATEGORY_LABELS[detail.category], item: absoluteUrl("/services") },
+    { "@type": "ListItem", position: 4, name: detail.title, item: absoluteUrl(`/services/${detail.slug}`) },
   ] };
 }
 
+function webPageSchema(detail: ServiceDetailContent, url: string, image: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: detail.metaTitle,
+    description: detail.metaDescription,
+    url,
+    image,
+    isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url },
+    about: { "@type": "Service", name: detail.title, serviceType: CATEGORY_LABELS[detail.category] },
+  };
+}
 function serviceSchema(detail: ServiceDetailContent) {
-  return { "@context": "https://schema.org", "@type": "Service", name: detail.title, description: detail.metaDescription, provider: { "@type": "ProfessionalService", name: SITE.name, telephone: SITE.phone, email: SITE.email }, areaServed: "IN", serviceType: CATEGORY_LABELS[detail.category] };
+  return { "@context": "https://schema.org", "@type": "Service", name: detail.title, description: detail.metaDescription, url: absoluteUrl(`/services/${detail.slug}`), provider: { "@type": "ProfessionalService", name: SITE.name, telephone: SITE.phone, email: SITE.email }, areaServed: { "@type": "Country", name: "India" }, serviceType: CATEGORY_LABELS[detail.category] };
 }
 
 function faqSchema(items: Array<{ q: string; a: string }>) {

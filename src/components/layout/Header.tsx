@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { SITE } from "@/data/site";
-import { CATEGORY_LABELS, SERVICES, servicesByCategory } from "@/data/services";
+import { CATEGORY_LABELS, servicesByCategory } from "@/data/services";
 import roshaniLogo from "@/assets/roshani_logo.png";
 
 type NavItem = { to: string; label: string; desktopLabel?: string; hasMega?: boolean };
@@ -13,7 +13,7 @@ const NAV: NavItem[] = [
   { to: "/company-registration", label: "Company Registration", desktopLabel: "Company" },
   { to: "/tender-services", label: "Tender Services", desktopLabel: "Tender" },
   { to: "/gst-taxation", label: "GST & Taxation", desktopLabel: "GST & Tax" },
-  { to: "/government-licenses", label: "Government Licenses", desktopLabel: "Licenses" },
+  { to: "/government-licenses", label: "License & Government Certification", desktopLabel: "Licenses" },
   { to: "/resources", label: "Resources" },
 ];
 

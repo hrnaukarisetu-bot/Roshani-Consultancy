@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="96" viewBox="0 0 260 96" role="img" aria-labelledby="title">
+  <title>Apex Industries</title>
+  <rect width="260" height="96" rx="18" fill="#ffffff"/>
+  <rect x="1" y="1" width="258" height="94" rx="17" fill="none" stroke="#E3E9F3" stroke-width="2"/>
+  <circle cx="48" cy="48" r="25" fill="#233E78"/>
+  <path d="M48 20a28 28 0 0 1 28 28H48Z" fill="#F97316" opacity="0.92"/>
+  <text x="48" y="55" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#fff">AI</text>
+  <text x="88" y="43" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#142A52">Apex</text>
+  <text x="88" y="65" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#55627A">Industries</text>
+</svg>

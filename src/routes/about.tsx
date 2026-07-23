@@ -4,6 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CheckCircle2, Award, Target, Eye, Heart, Sparkles, Quote } from "lucide-react";
+import founderPhoto from "@/assets/Founder photo.jpeg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -44,7 +45,7 @@ function About() {
               align="left"
               eyebrow="Who We Are"
               title={<>13+ years of end-to-end business consulting expertise</>}
-              description="From company registration to government licensing, tender consulting and taxation — we bring together the professionals, processes and technology to make business setup effortless."
+              description="From company registration to license and government certification, tender consulting and taxation — we bring together the professionals, processes and technology to make business setup effortless."
             />
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
@@ -112,9 +113,9 @@ function About() {
             <div className="relative">
               <div className="absolute -inset-3 rounded-3xl gradient-orange opacity-20 blur-2xl" />
               <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
-                alt="Mr. Nagsen D. Surwade, Founder — Roshani IT Consultancy"
-                className="relative h-[460px] w-full rounded-3xl object-cover shadow-soft"
+                src={founderPhoto}
+                alt="Founder of Roshani Consultancy"
+                className="relative aspect-[4/5] h-auto max-h-[520px] w-full rounded-3xl object-cover object-top shadow-soft"
               />
               <div className="relative mt-4 rounded-2xl border border-border bg-white p-4 shadow-sm">
                 <div className="text-sm font-bold text-navy-dark">Mr. Nagsen D. Surwade</div>
