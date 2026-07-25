@@ -1,55 +1,94 @@
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, Building2, BriefcaseBusiness, MapPinned, Tags } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ClientLogo } from "@/components/ClientCard";
 import { SectionHeading } from "@/components/SectionHeading";
-import apexIndustries from "@/assets/client-logos/apex-industries.svg";
-import greenleafAgro from "@/assets/client-logos/greenleaf-agro.svg";
-import horizonFoundation from "@/assets/client-logos/horizon-foundation.svg";
-import novaEnterprises from "@/assets/client-logos/nova-enterprises.svg";
-import unityAssociates from "@/assets/client-logos/unity-associates.svg";
-import brightpathSolutions from "@/assets/client-logos/brightpath-solutions.svg";
-import shreeVentures from "@/assets/client-logos/shree-ventures.svg";
-import urbanedgeGroup from "@/assets/client-logos/urbanedge-group.svg";
-import primeworks from "@/assets/client-logos/primeworks.svg";
-import growthsphere from "@/assets/client-logos/growthsphere.svg";
-
-const CLIENT_LOGOS = [
-  { name: "Apex Industries", src: apexIndustries },
-  { name: "GreenLeaf Agro", src: greenleafAgro },
-  { name: "Horizon Foundation", src: horizonFoundation },
-  { name: "Nova Enterprises", src: novaEnterprises },
-  { name: "Unity Associates", src: unityAssociates },
-  { name: "BrightPath Solutions", src: brightpathSolutions },
-  { name: "Shree Ventures", src: shreeVentures },
-  { name: "UrbanEdge Group", src: urbanedgeGroup },
-  { name: "PrimeWorks", src: primeworks },
-  { name: "GrowthSphere", src: growthsphere },
-];
+import { PUBLISHED_CLIENTS, type ClientRecord } from "@/data/clients";
 
 export function OurClients() {
-  const marqueeItems = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
-
+  const [clients, setClients] = useState<ClientRecord[]>(PUBLISHED_CLIENTS);
+  useEffect(() => {
+    fetch("/api/clients")
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data) => {
+        if (Array.isArray(data.clients)) setClients(data.clients);
+      })
+      .catch(() => undefined);
+  }, []);
+  const featured = useMemo(
+    () => clients.filter((client) => client.isFeatured).slice(0, 8),
+    [clients],
+  );
+  const stats = useMemo(
+    () => [
+      { label: "Clients Served", value: clients.length, icon: Building2 },
+      {
+        label: "Cities Covered",
+        value: new Set(clients.map((client) => client.city)).size,
+        icon: MapPinned,
+      },
+      {
+        label: "Service Categories",
+        value: new Set(clients.flatMap((client) => client.services)).size,
+        icon: Tags,
+      },
+      {
+        label: "Business Categories",
+        value: new Set(clients.map((client) => client.natureOfBusiness)).size,
+        icon: BriefcaseBusiness,
+      },
+    ],
+    [clients],
+  );
   return (
-    <section className="overflow-hidden bg-surface py-20" aria-labelledby="our-clients-title">
+    <section className="bg-surface py-20" aria-labelledby="our-clients-title">
       <div className="container-x">
         <SectionHeading
           eyebrow="Trusted By"
-          title={<span id="our-clients-title">Our Clients</span>}
-          description="We are proud to support businesses, startups, NGOs and organizations with reliable registration, compliance and consultancy services."
+          title={<span id="our-clients-title">Trusted by Growing Businesses</span>}
+          description="We support businesses, startups, NGOs and organizations with reliable registration, compliance and consultancy services."
         />
-      </div>
-      <div className="mt-12 overflow-hidden">
-        <div className="client-marquee flex w-max gap-5 px-5" aria-label="Client logo carousel">
-          {marqueeItems.map((client, index) => (
+        <div className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {stats.map(({ label, value, icon: Icon }) => (
             <div
-              key={`${client.name}-${index}`}
-              className="grid h-24 w-[220px] shrink-0 place-items-center rounded-2xl border border-border bg-white p-4 shadow-sm transition hover:border-orange/40 sm:w-[260px]"
+              key={label}
+              className="rounded-2xl border border-border bg-white p-4 text-center shadow-sm"
             >
-              <img
-                src={client.src}
-                alt={`${client.name} logo`}
-                className="h-full w-full object-contain opacity-55 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-                loading="lazy"
-              />
+              <Icon className="mx-auto h-5 w-5 text-orange" aria-hidden="true" />
+              <div className="mt-2 text-2xl font-bold text-navy-dark">{value}</div>
+              <div className="mt-1 text-xs font-medium text-muted-foreground">{label}</div>
             </div>
           ))}
+        </div>
+        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+          {featured.map((client) => (
+            <div
+              key={client.id}
+              className="rounded-2xl border border-border bg-white p-3 shadow-sm transition hover:border-orange/40 hover:shadow-soft"
+            >
+              <ClientLogo client={client} />
+              <p className="mt-3 line-clamp-2 text-center text-sm font-semibold text-navy-dark">
+                {client.companyName}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-9 text-center">
+          <Link
+            to="/clients"
+            search={{
+              q: "",
+              city: "",
+              business: "",
+              service: "",
+              featured: false,
+              sort: "order",
+              page: 1,
+            }}
+            className="inline-flex items-center gap-2 rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
+          >
+            View All Clients <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </section>

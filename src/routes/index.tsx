@@ -22,7 +22,7 @@ import { Reveal } from "@/components/Reveal";
 import { getService, servicesByCategory, INDUSTRIES, type ServiceCategory } from "@/data/services";
 import { FAQS, TESTIMONIALS } from "@/data/content";
 import { SITE } from "@/data/site";
-import roshaniBanner from "@/assets/roshani_banner.png";
+import heroImage from "@/assets/hero_img.jpeg";
 import officeImage from "@/assets/office.png";
 import { useEffect, useState } from "react";
 import {
@@ -36,8 +36,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title:
-          "Roshani IT Consultancy | Company Registration, GST & Tender Services in Akola",
+        title: "Roshani IT Consultancy | Company Registration, GST & Tender Services in Akola",
       },
       {
         name: "description",
@@ -84,7 +83,7 @@ function Home() {
   ];
   const featured = homepageServiceSlugs
     .map((slug) => getService(slug))
-    .filter((service) => Boolean(service));
+    .filter((service): service is NonNullable<typeof service> => Boolean(service));
 
   return (
     <SiteLayout>
@@ -114,8 +113,8 @@ function Home() {
               <span className="text-gradient-brand">Legally & Professionally</span>
             </h1>
             <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-              Complete support for company registration, GST, government tenders, licenses,
-              taxation and regulatory compliance â€” under one roof for Indian startups and MSMEs.
+              Complete support for company registration, GST, government tenders, licenses, taxation
+              and regulatory compliance â€” under one roof for Indian startups and MSMEs.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -147,7 +146,7 @@ function Home() {
           <div className="relative">
             <div className="relative overflow-hidden rounded-3xl border border-border bg-white shadow-soft">
               <img
-                src={roshaniBanner}
+                src={heroImage}
                 alt="Roshani Consultancy business registration and compliance support"
                 className="h-[360px] w-full object-cover object-top sm:h-[420px] md:h-[520px]"
                 loading="eager"
@@ -246,7 +245,8 @@ function Home() {
               eyebrow="About Us"
               title={
                 <>
-                  Building <span className="text-orange">Bharat's businesses</span>, one registration at a time.
+                  Building <span className="text-orange">Bharat's businesses</span>, one
+                  registration at a time.
                 </>
               }
               description="Roshani IT Consultancy supports new entrepreneurs, established businesses, startups and MSMEs with legal registration, compliance, tender filing, license and government certification and taxation services."
@@ -292,12 +292,32 @@ function Home() {
           />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: Shield, t: `${SITE.years}+ Years of Excellence`, d: "A decade-plus of hands-on experience across industries." },
-              { icon: Users, t: "CA & CS Guidance", d: "Filings supervised by qualified professionals." },
-              { icon: Clock, t: "Fast & Transparent", d: "Clear timelines, transparent pricing, no surprises." },
+              {
+                icon: Shield,
+                t: `${SITE.years}+ Years of Excellence`,
+                d: "A decade-plus of hands-on experience across industries.",
+              },
+              {
+                icon: Users,
+                t: "CA & CS Guidance",
+                d: "Filings supervised by qualified professionals.",
+              },
+              {
+                icon: Clock,
+                t: "Fast & Transparent",
+                d: "Clear timelines, transparent pricing, no surprises.",
+              },
               { icon: Sparkles, t: "End-to-End Support", d: "Registration to renewal and beyond." },
-              { icon: BadgeCheck, t: "Secure Handling", d: "Your documents and data are treated with strict confidentiality." },
-              { icon: FileSignature, t: "Local + Nationwide", d: "Rooted in Akola, serving clients across India." },
+              {
+                icon: BadgeCheck,
+                t: "Secure Handling",
+                d: "Your documents and data are treated with strict confidentiality.",
+              },
+              {
+                icon: FileSignature,
+                t: "Local + Nationwide",
+                d: "Rooted in Akola, serving clients across India.",
+              },
             ].map((w) => (
               <Reveal key={w.t}>
                 <div className="card-hover flex h-full flex-col rounded-2xl border border-border bg-white p-6">
@@ -412,9 +432,18 @@ function Home() {
             <div className="pointer-events-none absolute left-0 right-0 top-8 hidden h-px bg-gradient-to-r from-transparent via-orange/60 to-transparent md:block" />
             {[
               { t: "Consultation", d: "Free consultation to understand your business needs." },
-              { t: "Document Collection", d: "We share a checklist and collect the required documents." },
-              { t: "Application & Filing", d: "Filings are prepared, reviewed and submitted on your behalf." },
-              { t: "Registration & Support", d: "Certificate delivered plus ongoing compliance support." },
+              {
+                t: "Document Collection",
+                d: "We share a checklist and collect the required documents.",
+              },
+              {
+                t: "Application & Filing",
+                d: "Filings are prepared, reviewed and submitted on your behalf.",
+              },
+              {
+                t: "Registration & Support",
+                d: "Certificate delivered plus ongoing compliance support.",
+              },
             ].map((s, i) => (
               <li key={s.t} className="relative">
                 <div className="relative z-10 mx-auto flex h-16 w-16 items-center justify-center rounded-full gradient-orange text-lg font-bold text-white shadow-glow md:mx-0">
@@ -497,9 +526,7 @@ function Home() {
                 <AccordionTrigger className="text-left text-sm font-semibold text-navy-dark hover:no-underline">
                   {f.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground">
-                  {f.a}
-                </AccordionContent>
+                <AccordionContent className="text-sm text-muted-foreground">{f.a}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -555,10 +582,8 @@ function TestimonialSlider() {
     page * cardsPerPage + cardsPerPage,
   );
 
-  const goToPrevious = () =>
-    setPage((current) => (current === 0 ? pageCount - 1 : current - 1));
-  const goToNext = () =>
-    setPage((current) => (current === pageCount - 1 ? 0 : current + 1));
+  const goToPrevious = () => setPage((current) => (current === 0 ? pageCount - 1 : current - 1));
+  const goToNext = () => setPage((current) => (current === pageCount - 1 ? 0 : current + 1));
 
   useEffect(() => {
     if (pageCount <= 1) return;

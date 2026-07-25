@@ -20,10 +20,13 @@ import { Route as GovernmentLicensesRouteImport } from './routes/government-lice
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRegistrationRouteImport } from './routes/company-registration'
+import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
+import { Route as ClientsSlugRouteImport } from './routes/clients.$slug'
+import { Route as AdminClientsRouteImport } from './routes/admin/clients'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -80,6 +83,11 @@ const CompanyRegistrationRoute = CompanyRegistrationRouteImport.update({
   path: '/company-registration',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClientsRoute = ClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -100,10 +108,21 @@ const ResourcesSlugRoute = ResourcesSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ResourcesRoute,
 } as any)
+const ClientsSlugRoute = ClientsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ClientsRoute,
+} as any)
+const AdminClientsRoute = AdminClientsRouteImport.update({
+  id: '/admin/clients',
+  path: '/admin/clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/company-registration': typeof CompanyRegistrationRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -115,12 +134,15 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tender-services': typeof TenderServicesRoute
   '/terms': typeof TermsRoute
+  '/admin/clients': typeof AdminClientsRoute
+  '/clients/$slug': typeof ClientsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/company-registration': typeof CompanyRegistrationRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -132,6 +154,8 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tender-services': typeof TenderServicesRoute
   '/terms': typeof TermsRoute
+  '/admin/clients': typeof AdminClientsRoute
+  '/clients/$slug': typeof ClientsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
@@ -139,6 +163,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/company-registration': typeof CompanyRegistrationRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -150,6 +175,8 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tender-services': typeof TenderServicesRoute
   '/terms': typeof TermsRoute
+  '/admin/clients': typeof AdminClientsRoute
+  '/clients/$slug': typeof ClientsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
@@ -158,6 +185,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/clients'
     | '/company-registration'
     | '/contact'
     | '/disclaimer'
@@ -169,12 +197,15 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tender-services'
     | '/terms'
+    | '/admin/clients'
+    | '/clients/$slug'
     | '/resources/$slug'
     | '/services/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/clients'
     | '/company-registration'
     | '/contact'
     | '/disclaimer'
@@ -186,12 +217,15 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tender-services'
     | '/terms'
+    | '/admin/clients'
+    | '/clients/$slug'
     | '/resources/$slug'
     | '/services/$slug'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/clients'
     | '/company-registration'
     | '/contact'
     | '/disclaimer'
@@ -203,6 +237,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tender-services'
     | '/terms'
+    | '/admin/clients'
+    | '/clients/$slug'
     | '/resources/$slug'
     | '/services/$slug'
   fileRoutesById: FileRoutesById
@@ -210,6 +246,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ClientsRoute: typeof ClientsRouteWithChildren
   CompanyRegistrationRoute: typeof CompanyRegistrationRoute
   ContactRoute: typeof ContactRoute
   DisclaimerRoute: typeof DisclaimerRoute
@@ -221,6 +258,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TenderServicesRoute: typeof TenderServicesRoute
   TermsRoute: typeof TermsRoute
+  AdminClientsRoute: typeof AdminClientsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -302,6 +340,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanyRegistrationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clients': {
+      id: '/clients'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof ClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -330,8 +375,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesSlugRouteImport
       parentRoute: typeof ResourcesRoute
     }
+    '/clients/$slug': {
+      id: '/clients/$slug'
+      path: '/$slug'
+      fullPath: '/clients/$slug'
+      preLoaderRoute: typeof ClientsSlugRouteImport
+      parentRoute: typeof ClientsRoute
+    }
+    '/admin/clients': {
+      id: '/admin/clients'
+      path: '/admin/clients'
+      fullPath: '/admin/clients'
+      preLoaderRoute: typeof AdminClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface ClientsRouteChildren {
+  ClientsSlugRoute: typeof ClientsSlugRoute
+}
+
+const ClientsRouteChildren: ClientsRouteChildren = {
+  ClientsSlugRoute: ClientsSlugRoute,
+}
+
+const ClientsRouteWithChildren =
+  ClientsRoute._addFileChildren(ClientsRouteChildren)
 
 interface ResourcesRouteChildren {
   ResourcesSlugRoute: typeof ResourcesSlugRoute
@@ -360,6 +430,7 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ClientsRoute: ClientsRouteWithChildren,
   CompanyRegistrationRoute: CompanyRegistrationRoute,
   ContactRoute: ContactRoute,
   DisclaimerRoute: DisclaimerRoute,
@@ -371,6 +442,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TenderServicesRoute: TenderServicesRoute,
   TermsRoute: TermsRoute,
+  AdminClientsRoute: AdminClientsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
