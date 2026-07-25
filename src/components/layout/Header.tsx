@@ -13,8 +13,13 @@ const NAV: NavItem[] = [
   { to: "/company-registration", label: "Company Registration", desktopLabel: "Company" },
   { to: "/tender-services", label: "Tender Services", desktopLabel: "Tender" },
   { to: "/gst-taxation", label: "GST & Taxation", desktopLabel: "GST & Tax" },
-  { to: "/government-licenses", label: "License & Government Certification", desktopLabel: "Licenses" },
+  {
+    to: "/government-licenses",
+    label: "License & Government Certification",
+    desktopLabel: "Licenses",
+  },
   { to: "/resources", label: "Resources" },
+  { to: "/clients", label: "Our Clients", desktopLabel: "Clients" },
 ];
 
 export function Header() {
@@ -39,7 +44,9 @@ export function Header() {
   return (
     <header
       className={`sticky top-0 z-50 transition-all ${
-        scrolled ? "bg-white/95 shadow-[0_6px_24px_-12px_rgba(20,42,82,0.18)] backdrop-blur" : "bg-white"
+        scrolled
+          ? "bg-white/95 shadow-[0_6px_24px_-12px_rgba(20,42,82,0.18)] backdrop-blur"
+          : "bg-white"
       }`}
     >
       <div className="container-x flex h-20 items-center justify-between gap-4 md:h-24">
@@ -55,7 +62,10 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex xl:gap-1" aria-label="Primary">
+        <nav
+          className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex xl:gap-1"
+          aria-label="Primary"
+        >
           {NAV.map((n) => (
             <div key={n.to} className="relative group">
               <Link
@@ -100,7 +110,6 @@ export function Header() {
             </div>
           ))}
         </nav>
-
 
         <div className="hidden shrink-0 items-center gap-2 xl:flex">
           <Link
@@ -200,7 +209,6 @@ export function Header() {
               >
                 Get Free Consultation
               </Link>
-
             </nav>
           </div>
         </div>
