@@ -10,7 +10,7 @@ import { CheckCircle2 } from "lucide-react";
 export const Route = createFileRoute("/tender-services")({
   head: () => ({
     meta: [
-      { title: "Tender Consulting & GeM Registration | Roshani IT Consultancy" },
+      { title: "Tender Consulting & GeM Registration | India Business Care" },
       {
         name: "description",
         content:

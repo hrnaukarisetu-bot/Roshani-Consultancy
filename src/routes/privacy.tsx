@@ -5,8 +5,8 @@ import { PageHero } from "@/components/PageHero";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy | Roshani IT Consultancy" },
-      { name: "description", content: "How Roshani IT Consultancy collects, uses and protects your information." },
+      { title: "Privacy Policy | India Business Care" },
+      { name: "description", content: "How India Business Care collects, uses and protects your information." },
       { property: "og:url", content: "/privacy" },
     ],
     links: [{ rel: "canonical", href: "/privacy" }],
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/privacy")({
       <section className="bg-white py-16">
         <div className="container-x mx-auto max-w-3xl space-y-5 text-navy-dark/85">
           <p>
-            This Privacy Policy explains how Roshani IT Consultancy ("we", "us") collects,
+            This Privacy Policy explains how India Business Care ("we", "us") collects,
             uses and protects information you share with us through this website or during
             our consulting engagements.
           </p>

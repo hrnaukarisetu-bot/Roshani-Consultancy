@@ -30,7 +30,7 @@ export const Route = createFileRoute("/services/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Service Not Found | Roshani IT Consultancy" }, { name: "robots", content: "noindex" }] };
+      return { meta: [{ title: "Service Not Found | India Business Care" }, { name: "robots", content: "noindex" }] };
     }
     const { detail } = loaderData;
     const path = `/services/${detail.slug}`;
@@ -192,7 +192,7 @@ function ServiceDetail() {
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">{detail.deliverables.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul>
             </div>
             <div className="rounded-2xl bg-navy p-7 text-white shadow-soft">
-              <SectionEyebrow light>Roshani Consultancy</SectionEyebrow>
+              <SectionEyebrow light>India Business Care</SectionEyebrow>
               <h2 className="mt-2 text-3xl font-bold">Why choose us?</h2>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {["Expert Guidance", "Transparent Process", "Proper Documentation Support", "Timely Status Updates", "End-to-End Coordination", "Post-Service Assistance"].map((item) => <div key={item} className="rounded-xl bg-white/10 p-4 text-sm font-semibold text-white">{item}</div>)}
@@ -281,7 +281,7 @@ function buildFaqs(detail: ServiceDetailContent) {
     { q: `How long does ${detail.title} take?`, a: `${detail.estimatedTimeline}. Government processing timelines may vary.` },
     { q: "Is professional consultation necessary?", a: "It is not mandatory in every case, but professional review helps reduce avoidable errors, missing documents and incorrect service selection." },
     { q: "Are government fees included?", a: feeNote },
-    { q: "Can Roshani Consultancy assist with future compliance?", a: "Yes. We can guide you on renewals, return filings, registrations and related compliance after the service is complete." },
+    { q: "Can India Business Care assist with future compliance?", a: "Yes. We can guide you on renewals, return filings, registrations and related compliance after the service is complete." },
   ];
   return [...detail.faqs, ...generated].filter((item, index, arr) => arr.findIndex((x) => x.q === item.q) === index).slice(0, 8);
 }

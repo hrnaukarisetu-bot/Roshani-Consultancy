@@ -62,7 +62,7 @@ async function api(path: string, options: RequestInit = {}) {
 export const Route = createFileRoute("/admin/clients")({
   head: () => ({
     meta: [
-      { title: "Client Management | Roshani IT Consultancy" },
+      { title: "Client Management | India Business Care" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
@@ -144,7 +144,7 @@ function AdminClients() {
         <div className="mx-auto flex max-w-[1500px] items-center justify-between px-4 py-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-wider text-orange">
-              Roshani IT Consultancy
+              India Business Care
             </p>
             <h1 className="text-xl font-bold text-navy-dark">Client Portfolio Admin</h1>
           </div>

@@ -38,7 +38,7 @@ export const TESTIMONIALS = [
     name: "Rohit Deshmukh",
     role: "Founder, Deshmukh Infra Pvt Ltd",
     quote:
-      "Roshani IT Consultancy handled our Private Limited incorporation and PWD contractor registration seamlessly. Their team is prompt, transparent and highly knowledgeable.",
+      "India Business Care handled our Private Limited incorporation and PWD contractor registration seamlessly. Their team is prompt, transparent and highly knowledgeable.",
   },
   {
     name: "Sneha Kulkarni",

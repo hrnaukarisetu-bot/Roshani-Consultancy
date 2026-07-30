@@ -10,11 +10,11 @@ import { CATEGORY_LABELS, SERVICES, type ServiceCategory } from "@/data/services
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Business Services | Roshani IT Consultancy" },
+      { title: "Business Services | India Business Care" },
       {
         name: "description",
         content:
-          "Explore all services from Roshani IT Consultancy — company registration, GST, tenders, licenses, trademark and compliance for Indian businesses.",
+          "Explore all services from India Business Care — company registration, GST, tenders, licenses, trademark and compliance for Indian businesses.",
       },
       { property: "og:url", content: "/services" },
     ],

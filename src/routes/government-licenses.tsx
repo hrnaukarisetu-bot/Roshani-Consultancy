@@ -9,7 +9,7 @@ import { servicesByCategory } from "@/data/services";
 export const Route = createFileRoute("/government-licenses")({
   head: () => ({
     meta: [
-      { title: "License & Government Certification Services in India | Roshani IT Consultancy" },
+      { title: "License & Government Certification Services in India | India Business Care" },
       {
         name: "description",
         content:

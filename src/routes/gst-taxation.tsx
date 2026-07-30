@@ -10,7 +10,7 @@ import { servicesByCategory } from "@/data/services";
 export const Route = createFileRoute("/gst-taxation")({
   head: () => ({
     meta: [
-      { title: "GST Registration, Filing & Taxation Services | Roshani IT Consultancy" },
+      { title: "GST Registration, Filing & Taxation Services | India Business Care" },
       {
         name: "description",
         content:

@@ -9,11 +9,11 @@ import { SITE, mailLink } from "@/data/site";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Roshani IT Consultancy | Akola, Maharashtra" },
+      { title: "Contact India Business Care | Akola, Maharashtra" },
       {
         name: "description",
         content:
-          "Get in touch with Roshani IT Consultancy in Akola for company registration, GST, tender and licensing services. Email us or fill in the enquiry form.",
+          "Get in touch with India Business Care in Akola for company registration, GST, tender and licensing services. Email us or fill in the enquiry form.",
       },
       { property: "og:url", content: "/contact" },
     ],
@@ -83,7 +83,7 @@ function Contact() {
               </div>
               <div className="mt-6 overflow-hidden rounded-2xl border border-border">
                 <iframe
-                  title="Roshani IT Consultancy - Akola Office"
+                  title="India Business Care - Akola Office"
                   src="https://www.google.com/maps?q=Akola,Maharashtra,India&output=embed"
                   className="h-72 w-full"
                   loading="lazy"

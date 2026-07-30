@@ -57,11 +57,11 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailContent> = {
     overview: [
       "A Private Limited Company is a separate legal entity that allows founders to run a business with limited liability, defined shareholding and a structured management framework.",
       "It is commonly preferred by startups and growing businesses because it supports multiple shareholders, employee equity planning and a more investor-friendly governance structure.",
-      "Roshani Consultancy assists with name selection, director documentation, DSC coordination, SPICe+ filing support, PAN and TAN steps where applicable, and practical guidance after incorporation.",
+      "India Business Care assists with name selection, director documentation, DSC coordination, SPICe+ filing support, PAN and TAN steps where applicable, and practical guidance after incorporation.",
     ],
-    metaTitle: "Private Limited Company Registration in India | Roshani Consultancy",
+    metaTitle: "Private Limited Company Registration in India | India Business Care",
     metaDescription:
-      "Get expert assistance for Private Limited Company registration, including eligibility review, document preparation, MCA filing support and compliance guidance from Roshani Consultancy.",
+      "Get expert assistance for Private Limited Company registration, including eligibility review, document preparation, MCA filing support and compliance guidance from India Business Care.",
     keywords: ["private limited company registration", "pvt ltd registration", "company incorporation india"],
     benefits: [
       { title: "Separate Legal Identity", description: "The company can own assets, enter contracts and operate independently from its shareholders." },
@@ -111,9 +111,9 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailContent> = {
     overview: [
       "A One Person Company allows an individual entrepreneur to operate through a company structure while retaining single-member ownership.",
       "It offers separate legal identity and limited liability, making it more formal than a proprietorship while staying suitable for solo founders.",
-      "Roshani Consultancy helps review eligibility, nominee requirements, director documents, incorporation forms and conversion considerations as the business grows.",
+      "India Business Care helps review eligibility, nominee requirements, director documents, incorporation forms and conversion considerations as the business grows.",
     ],
-    metaTitle: "One Person Company Registration in India | Roshani Consultancy",
+    metaTitle: "One Person Company Registration in India | India Business Care",
     metaDescription:
       "Get expert OPC registration assistance, including nominee requirement review, document preparation, MCA filing support and compliance guidance.",
     keywords: ["opc registration", "one person company registration", "single founder company india"],
@@ -164,9 +164,9 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailContent> = {
     overview: [
       "A Limited Liability Partnership combines operational flexibility with limited liability for partners.",
       "It is widely used by consultants, agencies, professionals and small businesses that need a formal entity without a company-style shareholding structure.",
-      "Roshani Consultancy assists with name reservation, designated partner documentation, FiLLiP filing, LLP agreement preparation and annual compliance orientation.",
+      "India Business Care assists with name reservation, designated partner documentation, FiLLiP filing, LLP agreement preparation and annual compliance orientation.",
     ],
-    metaTitle: "LLP Registration in India | Roshani Consultancy",
+    metaTitle: "LLP Registration in India | India Business Care",
     metaDescription:
       "Get expert LLP registration assistance, including partner eligibility review, document preparation, LLP agreement support and MCA filing guidance.",
     keywords: ["llp registration", "limited liability partnership", "llp agreement filing"],
@@ -202,7 +202,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailContent> = {
       { q: "Is audit mandatory for every LLP?", a: "Audit applicability depends on turnover and contribution thresholds under applicable rules." },
       { q: "Can an LLP do business across India?", a: "Yes, subject to registrations and compliance required for the business activity." },
       { q: "Are government fees included?", a: feeNote },
-      { q: "Can Roshani Consultancy assist with annual filing?", a: "Yes, annual return and statement of accounts filing support can be provided." },
+      { q: "Can India Business Care assist with annual filing?", a: "Yes, annual return and statement of accounts filing support can be provided." },
     ],
     relatedServices: ["digital-signature-certificate", "gst-registration", "income-tax-return-filing"],
   },
@@ -217,9 +217,9 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailContent> = {
     overview: [
       "A Section 8 Company is formed for charitable or non-profit objectives such as education, social welfare, art, science, sports, environment or similar purposes.",
       "Its income and profits must be applied toward its stated objects and cannot be distributed as dividends to members.",
-      "Roshani Consultancy assists with objective drafting, director documents, licence application coordination, incorporation filing and future compliance considerations.",
+      "India Business Care assists with objective drafting, director documents, licence application coordination, incorporation filing and future compliance considerations.",
     ],
-    metaTitle: "Section 8 Company Registration in India | Roshani Consultancy",
+    metaTitle: "Section 8 Company Registration in India | India Business Care",
     metaDescription:
       "Get expert assistance for Section 8 Company registration, including non-profit objective review, licence documents, MCA filing support and compliance guidance.",
     keywords: ["section 8 company registration", "ngo company registration", "non profit company india"],
@@ -270,9 +270,9 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailContent> = {
     overview: [
       "A Nidhi Company is a mutual benefit company created to encourage savings and lending among its members.",
       "It can accept deposits and lend only within its member base, and regulatory conditions under Nidhi rules must be followed carefully.",
-      "Roshani Consultancy helps with incorporation planning, member and director documentation, MCA filing support and compliance considerations after registration.",
+      "India Business Care helps with incorporation planning, member and director documentation, MCA filing support and compliance considerations after registration.",
     ],
-    metaTitle: "Nidhi Company Registration in India | Roshani Consultancy",
+    metaTitle: "Nidhi Company Registration in India | India Business Care",
     metaDescription:
       "Get expert assistance for Nidhi Company registration, including member eligibility review, documentation, MCA filing support and compliance guidance.",
     keywords: ["nidhi company registration", "mutual benefit company", "nidhi company compliance"],
@@ -308,7 +308,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailContent> = {
       { q: "Is it an NBFC?", a: "A Nidhi Company is not the same as a regular NBFC, but it is subject to specific mutual benefit company rules." },
       { q: "How many members are required?", a: "Minimum incorporation and post-incorporation member requirements apply as per current rules." },
       { q: "Are government fees included?", a: feeNote },
-      { q: "Can Roshani Consultancy help after registration?", a: "Yes, we can assist with post-registration filings and compliance planning." },
+      { q: "Can India Business Care help after registration?", a: "Yes, we can assist with post-registration filings and compliance planning." },
     ],
     relatedServices: ["digital-signature-certificate", "income-tax-return-filing", "gst-registration"],
   },
@@ -323,9 +323,9 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailContent> = {
     overview: [
       "A Farmer Producer Company enables primary producers to organise collectively for procurement, production, processing, marketing and value addition.",
       "It can improve bargaining power, shared infrastructure planning and market access while giving members a formal company structure.",
-      "Roshani Consultancy helps verify member eligibility, prepare incorporation documents, coordinate DSC requirements and guide producer-company compliance after registration.",
+      "India Business Care helps verify member eligibility, prepare incorporation documents, coordinate DSC requirements and guide producer-company compliance after registration.",
     ],
-    metaTitle: "Farmer Producer Company Registration in India | Roshani Consultancy",
+    metaTitle: "Farmer Producer Company Registration in India | India Business Care",
     metaDescription:
       "Get expert Farmer Producer Company registration assistance, including member eligibility review, document preparation, MCA filing support and compliance guidance.",
     keywords: ["farmer producer company registration", "producer company india", "fpc registration"],
@@ -373,8 +373,8 @@ const remainingDetails: Record<string, Omit<ServiceDetailContent, "slug" | "cate
     shortTitle: "GeM",
     tagline: "Register and prepare your business to sell products or services on Government e-Marketplace.",
     shortDescription: "Get GeM seller registration assistance with profile setup, tax and business document review, catalogue guidance and bid-readiness support.",
-    overview: ["GeM registration helps eligible sellers list products or services for procurement by government buyers.", "A complete seller profile, accurate tax details and correct catalogue information are important for portal credibility.", "Roshani Consultancy assists with account setup, document checks, product or service listing guidance, vendor assessment coordination where applicable and bid participation orientation."],
-    metaTitle: "GeM Registration in India | Roshani Consultancy",
+    overview: ["GeM registration helps eligible sellers list products or services for procurement by government buyers.", "A complete seller profile, accurate tax details and correct catalogue information are important for portal credibility.", "India Business Care assists with account setup, document checks, product or service listing guidance, vendor assessment coordination where applicable and bid participation orientation."],
+    metaTitle: "GeM Registration in India | India Business Care",
     metaDescription: "Get expert assistance for GeM Registration, including seller profile setup, document preparation, listing support and bid participation guidance.",
     keywords: ["gem registration", "government e marketplace seller registration", "gem seller profile"],
     benefits: [{ title: "Government Buyer Access", description: "A GeM profile enables participation in government procurement opportunities." }, { title: "Structured Seller Profile", description: "Correct business, GST and bank details improve portal readiness." }, { title: "Catalogue Support", description: "Products or services can be organised with clearer listing information." }, { title: "Bid Readiness", description: "Understand basic tender and bid participation requirements before applying." }, { title: "Documentation Clarity", description: "Reduce avoidable portal issues caused by incomplete or mismatched documents." }],
@@ -385,7 +385,7 @@ const remainingDetails: Record<string, Omit<ServiceDetailContent, "slug" | "cate
     estimatedTimeline: "Depends on portal verification, category requirements and document readiness",
     supportType: "GeM Seller Onboarding Assistance",
     deliverables: ["GeM profile setup support", "Document checklist", "Catalogue listing guidance", "Vendor assessment coordination where applicable", "Bid-readiness orientation", "Profile update guidance"],
-    faqs: [{ q: "Is GST mandatory for GeM registration?", a: "GST is generally required unless the goods or services are exempt or the seller category permits otherwise." }, { q: "Can services be listed on GeM?", a: "Yes, eligible services can be listed based on GeM categories and portal rules." }, { q: "What is vendor assessment?", a: "Some categories may require additional assessment or validation by an authorised agency or process." }, { q: "Can registration be completed online?", a: "Yes, most GeM onboarding steps are portal-based." }, { q: "Are government fees included?", a: feeNote }, { q: "Can Roshani Consultancy help with bids later?", a: "Yes, bid support can be handled as a separate or ongoing service." }],
+    faqs: [{ q: "Is GST mandatory for GeM registration?", a: "GST is generally required unless the goods or services are exempt or the seller category permits otherwise." }, { q: "Can services be listed on GeM?", a: "Yes, eligible services can be listed based on GeM categories and portal rules." }, { q: "What is vendor assessment?", a: "Some categories may require additional assessment or validation by an authorised agency or process." }, { q: "Can registration be completed online?", a: "Yes, most GeM onboarding steps are portal-based." }, { q: "Are government fees included?", a: feeNote }, { q: "Can India Business Care help with bids later?", a: "Yes, bid support can be handled as a separate or ongoing service." }],
     relatedServices: ["digital-signature-certificate", "msme-udyam-registration", "gst-registration"],
   },
   "digital-signature-certificate": {
@@ -393,8 +393,8 @@ const remainingDetails: Record<string, Omit<ServiceDetailContent, "slug" | "cate
     shortTitle: "DSC",
     tagline: "Secure digital signing support for tenders, MCA, GST, income tax and e-procurement portals.",
     shortDescription: "Get Class 3 DSC assistance for individuals and organisations with identity verification, application support and delivery coordination.",
-    overview: ["A Digital Signature Certificate is used to digitally sign documents and authenticate identity on approved online portals.", "Class 3 DSC is commonly required for e-tendering, MCA filings, income tax filings and other secure transactions.", "Roshani Consultancy helps with DSC type selection, identity verification coordination, token or cloud-based delivery guidance depending on provider and portal usage support."],
-    metaTitle: "Digital Signature Certificate in India | Roshani Consultancy",
+    overview: ["A Digital Signature Certificate is used to digitally sign documents and authenticate identity on approved online portals.", "Class 3 DSC is commonly required for e-tendering, MCA filings, income tax filings and other secure transactions.", "India Business Care helps with DSC type selection, identity verification coordination, token or cloud-based delivery guidance depending on provider and portal usage support."],
+    metaTitle: "Digital Signature Certificate in India | India Business Care",
     metaDescription: "Get expert Digital Signature Certificate assistance for tenders, MCA, GST and income tax use cases with KYC and issuance support.",
     keywords: ["digital signature certificate", "class 3 dsc", "dsc for tender"],
     benefits: [{ title: "Legally Recognised Signing", description: "Use DSC for secure authentication on supported portals." }, { title: "Tender and MCA Readiness", description: "Required for many e-tender and MCA filing workflows." }, { title: "Individual or Organisation Use", description: "Choose the right DSC type based on applicant and purpose." }, { title: "Verification Support", description: "KYC and identity verification steps are easier with guided assistance." }, { title: "Portal Usage Guidance", description: "Understand mapping and signing basics after issuance." }],
@@ -405,7 +405,7 @@ const remainingDetails: Record<string, Omit<ServiceDetailContent, "slug" | "cate
     estimatedTimeline: "Often 1-3 working days after successful KYC, depending on provider processing",
     supportType: "DSC Application and Verification Assistance",
     deliverables: ["DSC type guidance", "Application support", "KYC coordination", "Issuance status updates", "Token or cloud delivery guidance", "Portal usage checklist"],
-    faqs: [{ q: "Which DSC is required for tenders?", a: "Class 3 DSC is commonly required for e-tendering and e-procurement portals." }, { q: "Can one DSC be used for multiple portals?", a: "Usually yes, if the DSC type and applicant details match the portal requirements." }, { q: "Is video KYC required?", a: "KYC requirements depend on the certifying provider and DSC type." }, { q: "How long is a DSC valid?", a: "Validity depends on the selected certificate period and provider options." }, { q: "Are government fees included?", a: feeNote }, { q: "Can Roshani Consultancy help map DSC to tender portals?", a: "Yes, portal mapping guidance can be provided where applicable." }],
+    faqs: [{ q: "Which DSC is required for tenders?", a: "Class 3 DSC is commonly required for e-tendering and e-procurement portals." }, { q: "Can one DSC be used for multiple portals?", a: "Usually yes, if the DSC type and applicant details match the portal requirements." }, { q: "Is video KYC required?", a: "KYC requirements depend on the certifying provider and DSC type." }, { q: "How long is a DSC valid?", a: "Validity depends on the selected certificate period and provider options." }, { q: "Are government fees included?", a: feeNote }, { q: "Can India Business Care help map DSC to tender portals?", a: "Yes, portal mapping guidance can be provided where applicable." }],
     relatedServices: ["gem-registration", "private-limited-company", "gst-return-filing"],
   },
 };
@@ -414,7 +414,7 @@ const remainingDetails: Record<string, Omit<ServiceDetailContent, "slug" | "cate
 
 const extraDetails: Record<string, Omit<ServiceDetailContent, "slug" | "category">> = {
   "msme-udyam-registration": makeDetail("MSME / Udyam Registration", "Udyam", "Get formal MSME recognition for your micro, small or medium enterprise.", "Udyam Registration is the official MSME recognition system for eligible micro, small and medium enterprises in India.", "Registration may support scheme readiness and vendor onboarding, but loans, subsidies or benefits are never guaranteed.", ["Official MSME Recognition", "Business Credibility", "Scheme Readiness", "Tender Support", "Simple Digital Certificate"], ["Micro enterprises", "Small enterprises", "Medium enterprises", "Manufacturers and service providers", "Businesses preparing for tenders"], ["Enterprise must fit MSME classification criteria", "PAN details are required", "GST details may be linked where applicable", "Business activity and bank details should be accurate"], [["Applicant Details", ["Aadhaar", "PAN", "Mobile number", "Email address"]], ["Business Details", ["Business name", "Business activity", "Address", "Bank details"]], ["Linked Details", ["GSTIN where applicable", "Investment and turnover details", "Previous registration details, if any"]]], ["Classification Review", "Detail Collection", "Data Verification", "Udyam Filing", "Certificate Guidance", "Next-Step Advisory"], "Often completed quickly when details validate correctly; portal and linked-data checks may vary", "Udyam Registration Assistance", ["gem-registration", "gst-registration", "trademark-registration"]),
-  "iso-certification": makeDetail("ISO 9001:2015 Certification", "ISO 9001", "Prepare your business for ISO 9001:2015 certification with structured quality documentation and audit coordination.", "ISO 9001:2015 certification shows that a business follows a recognised quality management system standard with defined process controls and improvement practices.", "Roshani Consultancy supports ISO 9001 gap assessment, quality documentation and audit coordination. Certification is issued by an eligible certification body; Roshani Consultancy is not an accreditation body.", ["Process Improvement", "Tender Credibility", "Customer Confidence", "Risk Control", "Recognised Standards"], ["Manufacturers", "Service providers", "Tender participants", "Export-oriented businesses", "Organisations improving quality, safety or environmental systems"], ["Defined business scope", "Basic process documentation", "Implementation readiness", "Internal records and responsibilities", "Audit by certification body required"], [["Business Documents", ["Registration proof", "Address proof", "Scope of certification", "Organisation chart"]], ["System Documents", ["Process details", "Quality or policy documents", "Records and formats"]], ["Audit Details", ["Site details", "Employee/process information", "Previous certificates, if any"]]], ["Standard Selection", "Gap Assessment", "Documentation", "Implementation Support", "Audit Coordination", "Certificate Guidance"], "Depends on standard, organisation readiness, audit scheduling and certification body review", "ISO Documentation and Audit Coordination", ["gem-registration", "trademark-registration", "msme-udyam-registration"]),
+  "iso-certification": makeDetail("ISO 9001:2015 Certification", "ISO 9001", "Prepare your business for ISO 9001:2015 certification with structured quality documentation and audit coordination.", "ISO 9001:2015 certification shows that a business follows a recognised quality management system standard with defined process controls and improvement practices.", "India Business Care supports ISO 9001 gap assessment, quality documentation and audit coordination. Certification is issued by an eligible certification body; India Business Care is not an accreditation body.", ["Process Improvement", "Tender Credibility", "Customer Confidence", "Risk Control", "Recognised Standards"], ["Manufacturers", "Service providers", "Tender participants", "Export-oriented businesses", "Organisations improving quality, safety or environmental systems"], ["Defined business scope", "Basic process documentation", "Implementation readiness", "Internal records and responsibilities", "Audit by certification body required"], [["Business Documents", ["Registration proof", "Address proof", "Scope of certification", "Organisation chart"]], ["System Documents", ["Process details", "Quality or policy documents", "Records and formats"]], ["Audit Details", ["Site details", "Employee/process information", "Previous certificates, if any"]]], ["Standard Selection", "Gap Assessment", "Documentation", "Implementation Support", "Audit Coordination", "Certificate Guidance"], "Depends on standard, organisation readiness, audit scheduling and certification body review", "ISO Documentation and Audit Coordination", ["gem-registration", "trademark-registration", "msme-udyam-registration"]),
   "trademark-registration": makeDetail("Trademark Registration", "Trademark", "Protect your brand name, logo or slogan with guided trademark filing support.", "A trademark helps protect brand identifiers such as names, logos, taglines and labels for specific goods or services.", "Correct class selection and a pre-filing search are important because trademark approval depends on distinctiveness, availability and Trademark Registry examination.", ["Brand Protection", "Legal Identity for Brand Assets", "Deters Misuse", "Business Asset Value", "Licensing and Expansion Support"], ["Startups", "Manufacturers", "Service brands", "E-commerce sellers", "Businesses launching a name, logo or slogan"], ["Applicant identity and business details", "Clear brand name or logo", "Correct trademark class", "Goods or services description", "Approval depends on Trademark Registry examination"], [["Applicant Documents", ["PAN and Aadhaar", "Business registration proof", "Address proof", "Authorisation, if applicable"]], ["Brand Materials", ["Brand name", "Logo file, if applicable", "Tagline, if applicable", "Goods or services description"]], ["Supporting Documents", ["MSME/Udyam certificate, if claiming applicable fee benefit", "User affidavit or proof of use, if applicable"]]], ["Trademark Search", "Class Selection", "Document Preparation", "Application Filing", "Examination Monitoring", "Objection or Hearing Support", "Registration and Renewal Guidance"], "Filing can be completed quickly when documents are ready; registry examination and approval may take several months or longer", "Trademark Filing and Registry Coordination", ["private-limited-company", "msme-udyam-registration", "iso-certification"]),
   "gst-registration": makeDetail("GST Registration", "GST", "Get GSTIN registration support for businesses, professionals and e-commerce sellers.", "GST Registration provides a GSTIN to eligible businesses and professionals for collecting tax, claiming input tax credit and making compliant supplies.", "Applicability depends on turnover, business activity, interstate supply, e-commerce activity and other GST rules.", ["GSTIN for Legal Supply", "Input Tax Credit Access", "B2B and Interstate Readiness", "E-Commerce Enablement", "Professional Compliance Base"], ["Businesses crossing GST threshold", "Interstate suppliers", "E-commerce sellers", "Service professionals", "Businesses opting for voluntary registration"], ["PAN of applicant or entity", "Valid business address", "Bank details", "Authorised signatory details", "Aadhaar/OTP or department verification may apply"], [["Applicant Documents", ["PAN and Aadhaar", "Photograph", "Mobile number and email"]], ["Business Proof", ["Business registration proof", "Address proof", "Rent agreement or NOC", "Utility bill"]], ["Financial and Activity Details", ["Bank details", "Business activity", "Authorisation letter or board resolution where applicable"]]], ["Applicability Review", "Document Collection", "GST Portal Application", "Verification Support", "Clarification Response", "GSTIN Guidance"], "Usually 5-10 working days, subject to department review and verification", "GST Registration Assistance", ["gst-return-filing", "msme-udyam-registration", "income-tax-return-filing"]),
   "gst-return-filing": makeDetail("GST Return Filing", "GST Returns", "Monthly, quarterly and annual GST filing support with data review and reconciliation.", "GST return filing keeps a GST-registered business compliant by reporting outward supplies, tax liability, input tax credit and related data.", "Accurate sales and purchase reconciliation helps reduce mismatch issues, late fees and avoidable compliance risk.", ["Timely Compliance", "ITC Reconciliation", "Accurate Tax Reporting", "Pending Return Support", "Better Record Maintenance"], ["GST-registered businesses", "Traders and manufacturers", "Service providers", "E-commerce sellers", "Businesses with pending GST returns"], ["Active GSTIN", "Sales invoices", "Purchase records", "Expense and ITC details", "Payment and bank information where needed"], [["Sales Data", ["Sales invoices", "Credit/debit notes", "E-way bill details where applicable"]], ["Purchase and ITC Data", ["Purchase invoices", "Expense invoices", "GSTR-2A/2B details", "Input tax credit records"]], ["Filing Records", ["GST login access or authorisation", "Previous returns", "Tax payment challans", "Bank statements if required"]]], ["Data Collection", "Review and Reconciliation", "Return Preparation", "Tax Liability Review", "GST Portal Filing", "Acknowledgement Handover"], "Depends on data readiness, filing period and pending-return complexity", "GST Filing and Reconciliation Support", ["gst-registration", "income-tax-return-filing", "msme-udyam-registration"]),
@@ -426,11 +426,11 @@ function makeDetail(title: string, shortTitle: string, tagline: string, overview
     title,
     shortTitle,
     tagline,
-    shortDescription: `${tagline} Roshani Consultancy assists with eligibility review, document preparation, portal or authority coordination and practical compliance guidance.`,
-    overview: [overviewA, overviewB, "Roshani Consultancy helps with requirement review, document preparation, application coordination and next-step guidance. Approval, certificate issuance and timelines depend on the relevant authority, portal or certification body."],
-    metaTitle: `${title} in India | Roshani Consultancy`,
-    metaDescription: `Get expert assistance for ${title}, including eligibility review, document preparation, application support and compliance guidance from Roshani Consultancy.`,
-    keywords: [title, `${title} India`, "Roshani Consultancy"],
+    shortDescription: `${tagline} India Business Care assists with eligibility review, document preparation, portal or authority coordination and practical compliance guidance.`,
+    overview: [overviewA, overviewB, "India Business Care helps with requirement review, document preparation, application coordination and next-step guidance. Approval, certificate issuance and timelines depend on the relevant authority, portal or certification body."],
+    metaTitle: `${title} in India | India Business Care`,
+    metaDescription: `Get expert assistance for ${title}, including eligibility review, document preparation, application support and compliance guidance from India Business Care.`,
+    keywords: [title, `${title} India`, "India Business Care"],
     benefits: benefits.map((benefit) => ({ title: benefit, description: `${benefit} helps make ${shortTitle} clearer, more reliable and easier to manage with professional guidance.` })),
     whoShouldApply,
     eligibility,
@@ -445,7 +445,7 @@ function makeDetail(title: string, shortTitle: string, tagline: string, overview
       { q: `How long does ${title} take?`, a: `${estimatedTimeline}. Government or authority timelines may vary.` },
       { q: "Can the application be completed online?", a: "Most steps are portal-based, but verification, audit or authority review requirements may vary by service." },
       { q: "Are government fees included?", a: feeNote },
-      { q: "Can Roshani Consultancy assist with future compliance?", a: "Yes, related filing, renewal and compliance support can be planned after the service is complete." },
+      { q: "Can India Business Care assist with future compliance?", a: "Yes, related filing, renewal and compliance support can be planned after the service is complete." },
     ],
     relatedServices,
   };
@@ -481,11 +481,11 @@ export const getServiceDetail = (service: Service): ServiceDetailContent => {
     overview: [
       `${service.title} helps Indian businesses complete important registration, filing or compliance requirements with structured professional support.`,
       service.short,
-      "Roshani Consultancy assists with requirement review, document preparation, portal coordination and practical next-step guidance. Processing timelines and approvals remain subject to the relevant authority or portal.",
+      "India Business Care assists with requirement review, document preparation, portal coordination and practical next-step guidance. Processing timelines and approvals remain subject to the relevant authority or portal.",
     ],
-    metaTitle: `${service.title} in India | Roshani Consultancy`,
-    metaDescription: `Get expert assistance for ${service.title}, including eligibility review, document preparation, application support and compliance guidance from Roshani Consultancy.`,
-    keywords: [service.title, CATEGORY_LABELS[service.category], "Roshani Consultancy", "India"],
+    metaTitle: `${service.title} in India | India Business Care`,
+    metaDescription: `Get expert assistance for ${service.title}, including eligibility review, document preparation, application support and compliance guidance from India Business Care.`,
+    keywords: [service.title, CATEGORY_LABELS[service.category], "India Business Care", "India"],
     benefits: service.benefits.map((title) => ({
       title,
       description: "Clear guidance and documentation support help make this service easier to complete correctly.",

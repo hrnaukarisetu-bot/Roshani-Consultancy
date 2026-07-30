@@ -9,13 +9,13 @@ import founderPhoto from "@/assets/Founder photo.jpeg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Roshani IT Consultancy | Business Consulting Experts in Akola" },
+      { title: "About India Business Care | Business Consulting Experts in Akola" },
       {
         name: "description",
         content:
-          "Meet the team behind Roshani IT Consultancy — 13+ years supporting Indian startups, MSMEs and contractors with registration, compliance and tender services.",
+          "Meet the team behind India Business Care — 13+ years supporting Indian startups, MSMEs and contractors with registration, compliance and tender services.",
       },
-      { property: "og:title", content: "About Roshani IT Consultancy" },
+      { property: "og:title", content: "About India Business Care" },
       { property: "og:url", content: "/about" },
     ],
     links: [{ rel: "canonical", href: "/about" }],
@@ -29,7 +29,7 @@ function About() {
       <PageHero
         eyebrow="About Us"
         title="Trusted business consultants building Bharat's next generation of MSMEs"
-        description="Roshani IT Consultancy is a business consulting firm helping startups, MSMEs, contractors and enterprises register, comply and grow — all under one roof."
+        description="India Business Care is a business consulting firm helping startups, MSMEs, contractors and enterprises register, comply and grow — all under one roof."
         breadcrumbs={[{ label: "About Us" }]}
       />
 
@@ -37,7 +37,7 @@ function About() {
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center">
           <img
             src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
-            alt="Roshani IT Consultancy team meeting"
+            alt="India Business Care team meeting"
             className="h-[480px] w-full rounded-3xl object-cover shadow-soft"
           />
           <div>
@@ -107,14 +107,14 @@ function About() {
           <SectionHeading
             eyebrow="Founder Profile"
             title={<>Meet Mr. Nagsen D. Surwade</>}
-            description="Director & Founder — leading Roshani IT Consultancy's mission to make business registration simple, transparent and accessible for every Indian entrepreneur."
+            description="Director & Founder — leading India Business Care's mission to make business registration simple, transparent and accessible for every Indian entrepreneur."
           />
           <div className="mt-12 grid gap-10 lg:grid-cols-[380px_1fr] lg:items-start">
             <div className="relative">
               <div className="absolute -inset-3 rounded-3xl gradient-orange opacity-20 blur-2xl" />
               <img
                 src={founderPhoto}
-                alt="Founder of Roshani Consultancy"
+                alt="Founder of India Business Care"
                 className="relative aspect-[4/5] h-auto max-h-[520px] w-full rounded-3xl object-cover object-top shadow-soft"
               />
               <div className="relative mt-4 rounded-2xl border border-border bg-white p-4 shadow-sm">
@@ -137,7 +137,7 @@ function About() {
                   </h4>
                   <ul className="mt-3 space-y-2 text-sm text-navy-dark">
                     {[
-                      "Director & Founder – Roshani IT Consultancy",
+                      "Director & Founder – India Business Care",
                       "Founder President – Dnyanrekha Foundation",
                       "Startup Founder & CEO – NaukruSetu.com",
                       "Founder & CEO – E-Tenderwala",

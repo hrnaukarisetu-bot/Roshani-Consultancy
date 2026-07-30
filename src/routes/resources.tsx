@@ -8,7 +8,7 @@ import { ArrowRight, Clock } from "lucide-react";
 export const Route = createFileRoute("/resources")({
   head: () => ({
     meta: [
-      { title: "Resources & Knowledge Centre | Roshani IT Consultancy" },
+      { title: "Resources & Knowledge Centre | India Business Care" },
       {
         name: "description",
         content:

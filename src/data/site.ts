@@ -1,7 +1,7 @@
 export const SITE = {
-  name: "Roshani IT Consultancy",
-  url: "https://roshani-consultancy.vercel.app",
-  short: "Roshani IT",
+  name: "India Business Care",
+  url: "https://indiabusinesscare.com",
+  short: "India Business Care",
   tagline: "Helping Business & Startup MSME Build the Bharat",
   headline: "Start Your Business Legally & Professionally",
   phone: "+91 8975008429",
@@ -16,7 +16,7 @@ export const SITE = {
   years: 13,
   hours: "Mon - Sat, 10:00 AM - 7:00 PM",
   whatsappMessage:
-    "Hello Roshani IT Consultancy, I would like to know more about your business registration and compliance services.",
+    "Hello India Business Care, I would like to know more about your business registration and compliance services.",
 } as const;
 
 export const whatsappLink = () =>
@@ -25,7 +25,7 @@ export const whatsappLink = () =>
   )}`;
 
 export const serviceWhatsappLink = (serviceName: string) => {
-  const message = `Hello Roshani Consultancy, I am interested in ${serviceName}. Please share more details.`;
+  const message = `Hello India Business Care, I am interested in ${serviceName}. Please share more details.`;
   return `https://wa.me/${SITE.phoneRaw.replace("+", "")}?text=${encodeURIComponent(message)}`;
 };
 
