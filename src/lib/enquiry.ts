@@ -6,6 +6,9 @@ export interface EnquiryPayload {
   service: string;
   message: string;
   website?: string;
+  city?: string;
+  field?: string;
+  source?: string;
 }
 
 export async function submitEnquiry(_payload: EnquiryPayload) {
