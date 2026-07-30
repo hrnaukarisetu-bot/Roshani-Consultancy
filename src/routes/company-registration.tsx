@@ -9,7 +9,7 @@ import { servicesByCategory } from "@/data/services";
 export const Route = createFileRoute("/company-registration")({
   head: () => ({
     meta: [
-      { title: "Company Registration Services in India | Roshani IT Consultancy" },
+      { title: "Company Registration Services in India | India Business Care" },
       {
         name: "description",
         content:

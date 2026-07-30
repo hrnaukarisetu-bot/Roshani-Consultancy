@@ -24,13 +24,13 @@ export const Route = createFileRoute("/clients")({
   }),
   head: () => ({
     meta: [
-      { title: "Our Clients | Roshani IT Consultancy" },
+      { title: "Our Clients | India Business Care" },
       {
         name: "description",
         content:
-          "Explore businesses and organizations supported by Roshani IT Consultancy through registration, certification, compliance and consultancy services.",
+          "Explore businesses and organizations supported by India Business Care through registration, certification, compliance and consultancy services.",
       },
-      { property: "og:title", content: "Our Clients | Roshani IT Consultancy" },
+      { property: "og:title", content: "Our Clients | India Business Care" },
       {
         property: "og:description",
         content:

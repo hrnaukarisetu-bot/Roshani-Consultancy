@@ -36,12 +36,12 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Roshani IT Consultancy | Company Registration, GST & Tender Services in Akola",
+        title: "India Business Care | Company Registration, GST & Tender Services in Akola",
       },
       {
         name: "description",
         content:
-          "Start your business legally. Roshani IT Consultancy offers company registration, GST, tender filing, licenses & compliance for Indian startups and MSMEs.",
+          "Start your business legally. India Business Care offers company registration, GST, tender filing, licenses & compliance for Indian startups and MSMEs.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -147,7 +147,7 @@ function Home() {
             <div className="relative overflow-hidden rounded-3xl border border-border bg-white shadow-soft">
               <img
                 src={heroImage}
-                alt="Roshani Consultancy business registration and compliance support"
+                alt="India Business Care business registration and compliance support"
                 className="h-[360px] w-full object-cover object-top sm:h-[420px] md:h-[520px]"
                 loading="eager"
               />
@@ -227,7 +227,7 @@ function Home() {
           <div className="relative">
             <img
               src={officeImage}
-              alt="Roshani Consultancy office consultation meeting"
+              alt="India Business Care office consultation meeting"
               className="h-[320px] w-full rounded-3xl object-cover shadow-soft sm:h-[440px]"
             />
             <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-white p-5 shadow-soft md:block">
@@ -249,7 +249,7 @@ function Home() {
                   registration at a time.
                 </>
               }
-              description="Roshani IT Consultancy supports new entrepreneurs, established businesses, startups and MSMEs with legal registration, compliance, tender filing, license and government certification and taxation services."
+              description="India Business Care supports new entrepreneurs, established businesses, startups and MSMEs with legal registration, compliance, tender filing, license and government certification and taxation services."
             />
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {[

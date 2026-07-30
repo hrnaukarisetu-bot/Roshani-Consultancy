@@ -5,8 +5,8 @@ import { PageHero } from "@/components/PageHero";
 export const Route = createFileRoute("/disclaimer")({
   head: () => ({
     meta: [
-      { title: "Disclaimer | Roshani IT Consultancy" },
-      { name: "description", content: "Legal disclaimer for information and services provided by Roshani IT Consultancy." },
+      { title: "Disclaimer | India Business Care" },
+      { name: "description", content: "Legal disclaimer for information and services provided by India Business Care." },
       { property: "og:url", content: "/disclaimer" },
     ],
     links: [{ rel: "canonical", href: "/disclaimer" }],

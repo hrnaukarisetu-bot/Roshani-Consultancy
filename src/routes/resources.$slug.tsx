@@ -17,7 +17,7 @@ export const Route = createFileRoute("/resources/$slug")({
     const url = `/resources/${p.slug}`;
     return {
       meta: [
-        { title: `${p.title} | Roshani IT Consultancy` },
+        { title: `${p.title} | India Business Care` },
         { name: "description", content: p.excerpt },
         { property: "og:title", content: p.title },
         { property: "og:description", content: p.excerpt },
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/resources/$slug")({
             headline: p.title,
             description: p.excerpt,
             image: p.cover,
-            author: { "@type": "Organization", name: "Roshani IT Consultancy" },
+            author: { "@type": "Organization", name: "India Business Care" },
           }),
         },
       ],

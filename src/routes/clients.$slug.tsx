@@ -13,11 +13,11 @@ export const Route = createFileRoute("/clients/$slug")({
     if (!client)
       return {
         meta: [
-          { title: "Client not found | Roshani IT Consultancy" },
+          { title: "Client not found | India Business Care" },
           { name: "robots", content: "noindex" },
         ],
       };
-    const description = `${client.companyName} in ${client.city}, supported with ${client.services.slice(0, 3).join(", ") || "business consultancy"} by Roshani IT Consultancy.`;
+    const description = `${client.companyName} in ${client.city}, supported with ${client.services.slice(0, 3).join(", ") || "business consultancy"} by India Business Care.`;
     return {
       meta: [
         { title: `${client.companyName} | Our Clients` },

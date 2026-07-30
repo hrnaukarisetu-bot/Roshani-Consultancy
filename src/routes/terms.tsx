@@ -5,8 +5,8 @@ import { PageHero } from "@/components/PageHero";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms & Conditions | Roshani IT Consultancy" },
-      { name: "description", content: "Terms and conditions for services provided by Roshani IT Consultancy." },
+      { title: "Terms & Conditions | India Business Care" },
+      { name: "description", content: "Terms and conditions for services provided by India Business Care." },
       { property: "og:url", content: "/terms" },
     ],
     links: [{ rel: "canonical", href: "/terms" }],
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/terms")({
       <PageHero title="Terms & Conditions" breadcrumbs={[{ label: "Terms & Conditions" }]} />
       <section className="bg-white py-16">
         <div className="container-x mx-auto max-w-3xl space-y-5 text-navy-dark/85">
-          <p>By using this website or engaging Roshani IT Consultancy for any service, you agree to the following terms.</p>
+          <p>By using this website or engaging India Business Care for any service, you agree to the following terms.</p>
           <h2 className="pt-4 text-xl font-bold text-navy-dark">Scope of Services</h2>
           <p>We provide business consulting, registration, taxation, tender and licensing services subject to applicable government processes.</p>
           <h2 className="pt-4 text-xl font-bold text-navy-dark">Fees & Refunds</h2>
