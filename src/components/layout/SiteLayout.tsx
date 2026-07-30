@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { FloatingActions } from "./FloatingActions";
+import { LeadPopup } from "@/components/LeadPopup";
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
@@ -12,6 +13,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       </main>
       <Footer />
       <FloatingActions />
+      <LeadPopup />
     </div>
   );
 }
