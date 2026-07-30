@@ -1,5 +1,4 @@
-import { Link } from "@tanstack/react-router";
-import { ArrowRight, Building2, BriefcaseBusiness, MapPinned, Tags } from "lucide-react";
+import { Building2, BriefcaseBusiness, MapPinned, Tags } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { ClientLogo } from "@/components/ClientCard";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -15,10 +14,7 @@ export function OurClients() {
       })
       .catch(() => undefined);
   }, []);
-  const featured = useMemo(
-    () => clients.filter((client) => client.isFeatured).slice(0, 8),
-    [clients],
-  );
+  const sliderClients = useMemo(() => [...clients, ...clients], [clients]);
   const stats = useMemo(
     () => [
       { label: "Clients Served", value: clients.length, icon: Building2 },
@@ -60,35 +56,21 @@ export function OurClients() {
             </div>
           ))}
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {featured.map((client) => (
-            <div
-              key={client.id}
-              className="rounded-2xl border border-border bg-white p-3 shadow-sm transition hover:border-orange/40 hover:shadow-soft"
-            >
-              <ClientLogo client={client} />
-              <p className="mt-3 line-clamp-2 text-center text-sm font-semibold text-navy-dark">
-                {client.companyName}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-9 text-center">
-          <Link
-            to="/clients"
-            search={{
-              q: "",
-              city: "",
-              business: "",
-              service: "",
-              featured: false,
-              sort: "order",
-              page: 1,
-            }}
-            className="inline-flex items-center gap-2 rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
-          >
-            View All Clients <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+        <div className="mt-8 overflow-hidden py-2" role="region" aria-label="Our clients">
+          <div className="client-marquee flex w-max gap-5">
+            {sliderClients.map((client, index) => (
+              <div
+                key={`${client.id}-${index}`}
+                aria-hidden={index >= clients.length}
+                className="w-[210px] shrink-0 rounded-2xl border border-border bg-white p-3 shadow-sm transition hover:border-orange/40 hover:shadow-soft sm:w-[240px] lg:w-[260px]"
+              >
+                <ClientLogo client={client} />
+                <p className="mt-3 line-clamp-2 text-center text-sm font-semibold text-navy-dark">
+                  {client.companyName}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

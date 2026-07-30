@@ -19,7 +19,6 @@ const NAV: NavItem[] = [
     desktopLabel: "Licenses",
   },
   { to: "/resources", label: "Resources" },
-  { to: "/clients", label: "Our Clients", desktopLabel: "Clients" },
 ];
 
 export function Header() {
