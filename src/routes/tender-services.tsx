@@ -30,7 +30,7 @@ function Page() {
       <PageHero
         eyebrow="Tender Services"
         title="End-to-end tender consulting for contractors & vendors"
-        description="From portal registration to bid submission — we help you compete and win government tenders."
+        description="From portal registration to bid submission â€” we help you compete and win government tenders."
         breadcrumbs={[{ label: "Tender Services" }]}
       />
       <section className="bg-white py-16">

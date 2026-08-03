@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { ContactForm } from "@/components/ContactForm";
+import { TrademarkPlans } from "@/components/TrademarkPlans";
 import { ServiceCard } from "@/components/ServiceCard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CATEGORY_LABELS, getService, servicesByCategory, type Service } from "@/data/services";
@@ -124,6 +125,8 @@ function ServiceDetail() {
           </div>
           <p className="container-x mt-4 text-xs text-muted-foreground">Government processing timelines may vary depending on document accuracy, portal status and authority review.</p>
         </section>
+
+        {detail.slug === "trademark-registration" && <TrademarkPlans />}
 
         <section className="bg-white py-16 md:py-20">
           <div className="container-x grid gap-10 lg:grid-cols-[1fr_360px] lg:items-start">

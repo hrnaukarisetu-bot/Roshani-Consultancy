@@ -29,7 +29,7 @@ function Page() {
       <PageHero
         eyebrow="License & Government Certification"
         title="Every license your business needs"
-        description="From basic registrations to industry-specific licenses — done right, first time."
+        description="From basic registrations to industry-specific licenses â€” done right, first time."
         breadcrumbs={[{ label: "License & Government Certification" }]}
       />
       <section className="bg-white py-16">

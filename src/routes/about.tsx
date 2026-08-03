@@ -13,7 +13,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Meet the team behind India Business Care — 13+ years supporting Indian startups, MSMEs and contractors with registration, compliance and tender services.",
+          "Meet the team behind India Business Care â€” 13+ years supporting Indian startups, MSMEs and contractors with registration, compliance and tender services.",
       },
       { property: "og:title", content: "About India Business Care" },
       { property: "og:url", content: "/about" },
@@ -29,7 +29,7 @@ function About() {
       <PageHero
         eyebrow="About Us"
         title="Trusted business consultants building Bharat's next generation of MSMEs"
-        description="India Business Care is a business consulting firm helping startups, MSMEs, contractors and enterprises register, comply and grow — all under one roof."
+        description="India Business Care is a business consulting firm helping startups, MSMEs, contractors and enterprises register, comply and grow â€” all under one roof."
         breadcrumbs={[{ label: "About Us" }]}
       />
 
@@ -45,7 +45,7 @@ function About() {
               align="left"
               eyebrow="Who We Are"
               title={<>13+ years of end-to-end business consulting expertise</>}
-              description="From company registration to license and government certification, tender consulting and taxation — we bring together the professionals, processes and technology to make business setup effortless."
+              description="From company registration to license and government certification, tender consulting and taxation â€” we bring together the professionals, processes and technology to make business setup effortless."
             />
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
@@ -68,7 +68,7 @@ function About() {
       <section className="bg-surface py-20">
         <div className="container-x">
           <SectionHeading
-            eyebrow="Mission • Vision • Values"
+            eyebrow="Mission â€¢ Vision â€¢ Values"
             title={<>The principles that guide our work</>}
           />
           <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -107,7 +107,7 @@ function About() {
           <SectionHeading
             eyebrow="Founder Profile"
             title={<>Meet Mr. Nagsen D. Surwade</>}
-            description="Director & Founder — leading India Business Care's mission to make business registration simple, transparent and accessible for every Indian entrepreneur."
+            description="Director & Founder â€” leading India Business Care's mission to make business registration simple, transparent and accessible for every Indian entrepreneur."
           />
           <div className="mt-12 grid gap-10 lg:grid-cols-[380px_1fr] lg:items-start">
             <div className="relative">
@@ -137,10 +137,10 @@ function About() {
                   </h4>
                   <ul className="mt-3 space-y-2 text-sm text-navy-dark">
                     {[
-                      "Director & Founder – India Business Care",
-                      "Founder President – Dnyanrekha Foundation",
-                      "Startup Founder & CEO – NaukruSetu.com",
-                      "Founder & CEO – E-Tenderwala",
+                      "Director & Founder â€“ India Business Care",
+                      "Founder President â€“ Dnyanrekha Foundation",
+                      "Startup Founder & CEO â€“ NaukruSetu.com",
+                      "Founder & CEO â€“ E-Tenderwala",
                     ].map((x) => (
                       <li key={x} className="flex gap-2">
                         <Award className="mt-0.5 h-4 w-4 shrink-0 text-orange" /> {x}

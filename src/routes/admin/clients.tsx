@@ -91,7 +91,7 @@ function AdminClients() {
   useEffect(() => {
     void load();
   }, []);
-  if (authenticated === null) return <Centered>Checking secure session…</Centered>;
+  if (authenticated === null) return <Centered>Checking secure sessionâ€¦</Centered>;
   if (!authenticated) return <Login onSuccess={load} />;
   const filtered = clients.filter((c) =>
     [c.companyName, c.clientName, c.city, c.natureOfBusiness, ...c.services]
@@ -287,11 +287,11 @@ function AdminClients() {
                         <td className="max-w-[220px] px-3 py-4 font-semibold text-navy-dark">
                           {client.companyName}
                         </td>
-                        <td className="px-3 py-4">{client.clientName || "—"}</td>
+                        <td className="px-3 py-4">{client.clientName || "â€”"}</td>
                         <td className="px-3 py-4">{client.natureOfBusiness}</td>
                         <td className="px-3 py-4">{client.city}</td>
                         <td className="max-w-[260px] px-3 py-4">
-                          {client.services.join(", ") || "—"}
+                          {client.services.join(", ") || "â€”"}
                         </td>
                         <td className="px-3 py-4">{client.isFeatured ? "Yes" : "No"}</td>
                         <td className="px-3 py-4">{client.isPublished ? "Published" : "Hidden"}</td>
@@ -555,7 +555,7 @@ function ClientForm({
       </Panel>
       <Panel title="Client / Company Logo">
         <p className="text-sm text-muted-foreground">
-          Recommended: 500 × 500 px. PNG, JPG, JPEG, WEBP or sanitized SVG. Maximum 2 MB.
+          Recommended: 500 Ã— 500 px. PNG, JPG, JPEG, WEBP or sanitized SVG. Maximum 2 MB.
         </p>
         <div className="mt-4 rounded-2xl border-2 border-dashed border-border p-5">
           <input
@@ -654,7 +654,7 @@ function ClientForm({
               className="rounded-full bg-navy-soft px-3 py-1.5 text-sm font-medium text-navy"
               title="Remove service"
             >
-              {item} ×
+              {item} Ã—
             </button>
           ))}
         </div>
@@ -869,8 +869,8 @@ function ImportPanel({ onImported }: { onImported: () => Promise<void> }) {
       <div className="rounded-2xl border-2 border-dashed border-border p-6 text-center">
         <Upload className="mx-auto h-7 w-7 text-orange" />
         <p className="mt-2 text-sm text-muted-foreground">
-          Upload XLSX, XLS or CSV, maximum 10 MB. Flexible headings include “Claint Name” and
-          “Service We Offer”.
+          Upload XLSX, XLS or CSV, maximum 10 MB. Flexible headings include â€œClaint Nameâ€ and
+          â€œService We Offerâ€.
         </p>
         <input
           type="file"
@@ -928,7 +928,7 @@ function ImportPanel({ onImported }: { onImported: () => Promise<void> }) {
                       (row.services as string[]).join(", "),
                     ].map((v, j) => (
                       <td key={j} className="border-b p-2">
-                        {String(v || "—")}
+                        {String(v || "â€”")}
                       </td>
                     ))}
                   </tr>
@@ -1072,7 +1072,7 @@ function Notice({ children, onClose }: { children: React.ReactNode; onClose: () 
         {children}
       </span>
       <button onClick={onClose} aria-label="Dismiss">
-        ×
+        Ã—
       </button>
     </div>
   );

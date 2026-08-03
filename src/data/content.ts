@@ -1,7 +1,7 @@
 export const FAQS = [
   {
     q: "Which company registration is suitable for my business?",
-    a: "It depends on your goals — Private Limited works best for startups seeking investors, LLP for professional firms, OPC for solo founders and Section 8 for non-profits. We recommend the right structure during your free consultation.",
+    a: "It depends on your goals â€” Private Limited works best for startups seeking investors, LLP for professional firms, OPC for solo founders and Section 8 for non-profits. We recommend the right structure during your free consultation.",
   },
   {
     q: "What documents are required for company registration?",
@@ -9,7 +9,7 @@ export const FAQS = [
   },
   {
     q: "How long does GST registration take?",
-    a: "Usually 5–10 working days after successful application, subject to department processing and verification.",
+    a: "Usually 5â€“10 working days after successful application, subject to department processing and verification.",
   },
   {
     q: "Can you help with government tenders?",
@@ -25,7 +25,7 @@ export const FAQS = [
   },
   {
     q: "Can I get a free initial consultation?",
-    a: "Absolutely. Our first consultation is free — call or WhatsApp us to schedule a call with an expert.",
+    a: "Absolutely. Our first consultation is free â€” call or WhatsApp us to schedule a call with an expert.",
   },
   {
     q: "Do you provide ongoing GST and compliance support?",
@@ -87,7 +87,7 @@ export const RESOURCES: Resource[] = [
     slug: "private-limited-vs-llp",
     title: "Private Limited vs LLP: Which is Right for Your Business?",
     excerpt:
-      "A side-by-side look at the two most popular business structures in India — liability, compliance, taxation and fundraising.",
+      "A side-by-side look at the two most popular business structures in India â€” liability, compliance, taxation and fundraising.",
     category: "Company Registration",
     readTime: "6 min read",
     cover:
@@ -129,7 +129,7 @@ export const RESOURCES: Resource[] = [
       },
       {
         heading: "Timelines",
-        body: "GSTINs are usually issued within 5–10 working days, subject to physical verification and department processing.",
+        body: "GSTINs are usually issued within 5â€“10 working days, subject to physical verification and department processing.",
       },
     ],
   },
@@ -179,7 +179,7 @@ export const RESOURCES: Resource[] = [
     slug: "fssai-license-guide",
     title: "How to Apply for an FSSAI Food License",
     excerpt:
-      "Basic, State and Central FSSAI licenses — eligibility, documents and turnaround times.",
+      "Basic, State and Central FSSAI licenses â€” eligibility, documents and turnaround times.",
     category: "License & Government Certification",
     readTime: "5 min read",
     cover:
@@ -190,7 +190,7 @@ export const RESOURCES: Resource[] = [
       },
       {
         heading: "Choosing the Right License",
-        body: "Basic (up to ₹12L turnover), State (₹12L–₹20Cr) and Central (>₹20Cr or import-export).",
+        body: "Basic (up to â‚¹12L turnover), State (â‚¹12Lâ€“â‚¹20Cr) and Central (>â‚¹20Cr or import-export).",
       },
     ],
   },

@@ -30,7 +30,7 @@ function Page() {
       <PageHero
         eyebrow="GST & Taxation"
         title="Stay compliant with confidence"
-        description="From registration to filing to audits — professional taxation support for businesses of every size."
+        description="From registration to filing to audits â€” professional taxation support for businesses of every size."
         breadcrumbs={[{ label: "GST & Taxation" }]}
       />
       <section className="bg-white py-16">

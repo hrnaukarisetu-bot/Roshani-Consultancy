@@ -170,7 +170,7 @@ function ClientsPage() {
                 label="Sort"
                 value={search.sort}
                 options={["order", "az", "za", "recent"]}
-                labels={["Default order", "Company A–Z", "Company Z–A", "Recently added"]}
+                labels={["Default order", "Company Aâ€“Z", "Company Zâ€“A", "Recently added"]}
                 onChange={(v) => update("sort", v)}
               />
             </div>

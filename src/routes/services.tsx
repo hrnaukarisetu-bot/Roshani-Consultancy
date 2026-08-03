@@ -14,7 +14,7 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Explore all services from India Business Care — company registration, GST, tenders, licenses, trademark and compliance for Indian businesses.",
+          "Explore all services from India Business Care â€” company registration, GST, tenders, licenses, trademark and compliance for Indian businesses.",
       },
       { property: "og:url", content: "/services" },
     ],
