@@ -17,6 +17,7 @@ export const SITE = {
   hours: "Mon - Sat, 10:00 AM - 7:00 PM",
   whatsappMessage:
     "Hello India Business Care, I would like to know more about your business registration and compliance services.",
+  googleBusinessProfile: "https://maps.app.goo.gl/wLmYPqWqmWbVZ8ac7",
 } as const;
 
 export const whatsappLink = () =>

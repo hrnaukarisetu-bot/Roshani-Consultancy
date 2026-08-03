@@ -146,7 +146,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           areaServed: "IN",
           priceRange: "$$",
           openingHours: "Mo-Sa 10:00-19:00",
-          sameAs: [],
+          sameAs: [SITE.googleBusinessProfile],
           serviceType: [
             "Company Registration",
             "GST Registration and Filing",
