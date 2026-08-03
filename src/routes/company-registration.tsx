@@ -4,6 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
 import { SectionHeading } from "@/components/SectionHeading";
+import { CompanyRegistrationPlans } from "@/components/CompanyRegistrationPlans";
 import { servicesByCategory } from "@/data/services";
 
 export const Route = createFileRoute("/company-registration")({
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/company-registration")({
       {
         name: "description",
         content:
-          "Private Limited, LLP, OPC, Section 8, Nidhi and Farmer Producer Company registration across India — quick, transparent and professional.",
+          "Private Limited, LLP, OPC, Section 8, Nidhi and Farmer Producer Company registration across India â€” quick, transparent and professional.",
       },
       { property: "og:url", content: "/company-registration" },
     ],
@@ -29,9 +30,10 @@ function Page() {
       <PageHero
         eyebrow="Company Registration"
         title="Register the right business entity in India"
-        description="Choose from Private Limited, LLP, OPC, Section 8, Nidhi and Producer Company structures — we handle the full process end to end."
+        description="Choose from Private Limited, LLP, OPC, Section 8, Nidhi and Producer Company structures â€” we handle the full process end to end."
         breadcrumbs={[{ label: "Company Registration" }]}
       />
+      <CompanyRegistrationPlans />
       <section className="bg-white py-16">
         <div className="container-x">
           <SectionHeading

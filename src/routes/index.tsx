@@ -114,7 +114,7 @@ function Home() {
             </h1>
             <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
               Complete support for company registration, GST, government tenders, licenses, taxation
-              and regulatory compliance â€” under one roof for Indian startups and MSMEs.
+              and regulatory compliance Ã¢â‚¬â€ under one roof for Indian startups and MSMEs.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -337,7 +337,7 @@ function Home() {
       <CategoryPreview
         eyebrow="Company Registration"
         title="Register the right entity for your goals"
-        description="From solo founders to multi-partner ventures â€” pick the structure that fits."
+        description="From solo founders to multi-partner ventures Ã¢â‚¬â€ pick the structure that fits."
         categorySlug="company-registration"
       />
 
@@ -511,7 +511,7 @@ function Home() {
               align="left"
               eyebrow="FAQs"
               title={<>Answers to common questions</>}
-              description="Can't find what you're looking for? Reach out â€” our team is happy to help."
+              description="Can't find what you're looking for? Reach out Ã¢â‚¬â€ our team is happy to help."
             />
             <Link
               to="/contact"

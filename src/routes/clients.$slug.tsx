@@ -66,7 +66,7 @@ function ClientDetails() {
     <SiteLayout>
       <PageHero
         title={client.companyName}
-        description={`${client.natureOfBusiness} • ${client.city}`}
+        description={`${client.natureOfBusiness} â€¢ ${client.city}`}
         breadcrumbs={[{ label: "Our Clients", to: "/clients" }, { label: client.companyName }]}
       />
       <section className="container-x py-14 md:py-20">
@@ -123,7 +123,7 @@ function ClientDetails() {
             )}
             {client.testimonial && (
               <blockquote className="mt-8 rounded-3xl border-l-4 border-orange bg-orange-soft p-6 text-ink">
-                “{client.testimonial}”
+                â€œ{client.testimonial}â€
               </blockquote>
             )}
           </div>
