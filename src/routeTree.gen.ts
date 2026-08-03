@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PartnerWithUsRouteImport } from './routes/partner-with-us'
 import { Route as GstTaxationRouteImport } from './routes/gst-taxation'
 import { Route as GovernmentLicensesRouteImport } from './routes/government-licenses'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
@@ -56,6 +57,11 @@ const ResourcesRoute = ResourcesRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerWithUsRoute = PartnerWithUsRouteImport.update({
+  id: '/partner-with-us',
+  path: '/partner-with-us',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GstTaxationRoute = GstTaxationRouteImport.update({
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/disclaimer': typeof DisclaimerRoute
   '/government-licenses': typeof GovernmentLicensesRoute
   '/gst-taxation': typeof GstTaxationRoute
+  '/partner-with-us': typeof PartnerWithUsRoute
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRouteWithChildren
   '/services': typeof ServicesRouteWithChildren
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/disclaimer': typeof DisclaimerRoute
   '/government-licenses': typeof GovernmentLicensesRoute
   '/gst-taxation': typeof GstTaxationRoute
+  '/partner-with-us': typeof PartnerWithUsRoute
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRouteWithChildren
   '/services': typeof ServicesRouteWithChildren
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/disclaimer': typeof DisclaimerRoute
   '/government-licenses': typeof GovernmentLicensesRoute
   '/gst-taxation': typeof GstTaxationRoute
+  '/partner-with-us': typeof PartnerWithUsRoute
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRouteWithChildren
   '/services': typeof ServicesRouteWithChildren
@@ -191,6 +200,7 @@ export interface FileRouteTypes {
     | '/disclaimer'
     | '/government-licenses'
     | '/gst-taxation'
+    | '/partner-with-us'
     | '/privacy'
     | '/resources'
     | '/services'
@@ -211,6 +221,7 @@ export interface FileRouteTypes {
     | '/disclaimer'
     | '/government-licenses'
     | '/gst-taxation'
+    | '/partner-with-us'
     | '/privacy'
     | '/resources'
     | '/services'
@@ -231,6 +242,7 @@ export interface FileRouteTypes {
     | '/disclaimer'
     | '/government-licenses'
     | '/gst-taxation'
+    | '/partner-with-us'
     | '/privacy'
     | '/resources'
     | '/services'
@@ -252,6 +264,7 @@ export interface RootRouteChildren {
   DisclaimerRoute: typeof DisclaimerRoute
   GovernmentLicensesRoute: typeof GovernmentLicensesRoute
   GstTaxationRoute: typeof GstTaxationRoute
+  PartnerWithUsRoute: typeof PartnerWithUsRoute
   PrivacyRoute: typeof PrivacyRoute
   ResourcesRoute: typeof ResourcesRouteWithChildren
   ServicesRoute: typeof ServicesRouteWithChildren
@@ -303,6 +316,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner-with-us': {
+      id: '/partner-with-us'
+      path: '/partner-with-us'
+      fullPath: '/partner-with-us'
+      preLoaderRoute: typeof PartnerWithUsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gst-taxation': {
@@ -436,6 +456,7 @@ const rootRouteChildren: RootRouteChildren = {
   DisclaimerRoute: DisclaimerRoute,
   GovernmentLicensesRoute: GovernmentLicensesRoute,
   GstTaxationRoute: GstTaxationRoute,
+  PartnerWithUsRoute: PartnerWithUsRoute,
   PrivacyRoute: PrivacyRoute,
   ResourcesRoute: ResourcesRouteWithChildren,
   ServicesRoute: ServicesRouteWithChildren,

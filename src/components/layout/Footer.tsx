@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, MessageCircle, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Facebook, Instagram, Linkedin, Twitter, Star } from "lucide-react";
 import { SITE, whatsappLink, telLink, mailLink } from "@/data/site";
 import { CATEGORY_LABELS, servicesByCategory } from "@/data/services";
 import footerLogo from "@/assets/footer_logo.png";
@@ -16,7 +16,7 @@ export function Footer() {
             <div className="flex items-center gap-2.5">
               <img
                 src={footerLogo}
-                alt=""
+                alt={`${SITE.name} - business registration and compliance services`}
                 className="block h-20 w-auto max-w-[11.5rem] shrink-0 object-contain sm:h-24 sm:max-w-[13.5rem]"
                 width={270}
                 height={135}
@@ -35,6 +35,12 @@ export function Footer() {
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 shrink-0 text-orange" />
                 <a href={telLink()} className="hover:text-white">{SITE.phone}</a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Star className="h-4 w-4 shrink-0 text-orange" />
+                <a href={SITE.googleBusinessProfile} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  View Google Reviews
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 shrink-0 text-orange" />
@@ -95,6 +101,7 @@ export function Footer() {
                 { to: "/services", label: "Services" },
                 { to: "/resources", label: "Resources" },
                 { to: "/contact", label: "Contact" },
+                { to: "/partner-with-us", label: "Partner With Us" },
                 { to: "/privacy", label: "Privacy Policy" },
                 { to: "/terms", label: "Terms & Conditions" },
                 { to: "/disclaimer", label: "Disclaimer" },

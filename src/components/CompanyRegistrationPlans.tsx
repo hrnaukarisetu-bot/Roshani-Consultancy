@@ -16,7 +16,7 @@ const plans = [
     gifts: ["Business Document Kit", "Company Compliance Calendar"],
   },
   {
-    name: "Premium Plan", price: "₹34,999/-*", icon: Crown, badge: "Growth Plan", premium: true,
+    name: "Premium Plan", price: "Enquire for the Best Deal", icon: Crown, badge: "Growth Plan", premium: true,
     description: "For professional and growth-oriented businesses.",
     features: ["Everything in Business Plan", "Startup India Registration", "Import Export Code (IEC)", "Trademark Search Report", "Organization DSC", "First Board Resolution Draft", "MOA & AOA Soft Copy", "Share Certificate Draft", "One Year Basic Compliance Support"],
     gifts: ["GST Invoice Format", "HR Document Kit", "Digital Company Folder"],
@@ -59,7 +59,7 @@ export function CompanyRegistrationPlans() {
               <h3 className="mt-5 text-xl font-bold text-navy-dark">{plan.name}</h3><p className="mt-3 text-3xl font-extrabold text-orange">{plan.price}</p><p className="mt-4 text-sm text-muted-foreground">{plan.description}</p>
               <ul className="mt-6 flex-1 space-y-3">{plan.features.map((item) => <li key={item} className="flex items-start gap-2 text-sm text-navy-dark"><Check className="mt-0.5 h-4 w-4 shrink-0 text-orange" />{item}</li>)}</ul>
               {"gifts" in plan && plan.gifts && <div className="mt-5 rounded-xl bg-orange-soft p-4"><p className="flex items-center gap-2 text-xs font-extrabold uppercase text-orange"><Gift className="h-4 w-4" />Free</p><ul className="mt-2 space-y-1 text-sm text-navy-dark">{plan.gifts.map((gift) => <li key={gift}>{gift}</li>)}</ul></div>}
-              <button type="button" onClick={() => { setSelectedPlan(plan.name); setOpened(false); }} className={`mt-7 min-h-12 rounded-full px-5 py-3 text-sm font-bold text-white transition ${plan.featured ? "bg-orange hover:brightness-110" : "bg-navy hover:bg-navy-dark"}`}>Select Plan</button>
+              <button type="button" onClick={() => { setSelectedPlan(plan.name); setOpened(false); }} className={`mt-7 min-h-12 rounded-full px-5 py-3 text-sm font-bold text-white transition ${plan.featured ? "bg-orange hover:brightness-110" : "bg-navy hover:bg-navy-dark"}`}>{plan.premium ? "Enquire Now" : "Select Plan"}</button>
             </article>
           ); })}
         </div>

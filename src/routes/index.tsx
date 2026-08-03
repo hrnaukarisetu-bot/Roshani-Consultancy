@@ -11,6 +11,8 @@ import {
   Quote,
   FileSignature,
   BadgeCheck,
+  Star,
+  ExternalLink,
 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -598,7 +600,11 @@ function TestimonialSlider() {
   return (
     <section className="bg-white py-20">
       <div className="container-x">
-        <SectionHeading eyebrow="Client Voices" title={<>What our clients say</>} />
+        <SectionHeading
+          eyebrow="Client Voices"
+          title={<>What Our Clients Say</>}
+          description="Read what businesses and professionals say about working with India Business Care."
+        />
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {visibleTestimonials.map((testimonial) => (
             <article
@@ -651,6 +657,19 @@ function TestimonialSlider() {
             </button>
           </div>
         )}
+        <div className="mt-8 text-center">
+          <a
+            href={SITE.googleBusinessProfile}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy-dark"
+          >
+            <Star className="h-4 w-4 fill-orange text-orange" />
+            View Our Google Reviews
+            <ExternalLink className="h-4 w-4" />
+          </a>
+          <p className="mt-3 text-xs text-muted-foreground">Opens our verified Google Business Profile.</p>
+        </div>
       </div>
     </section>
   );

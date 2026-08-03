@@ -40,8 +40,8 @@ export function OurClients() {
     <section className="bg-surface py-20" aria-labelledby="our-clients-title">
       <div className="container-x">
         <SectionHeading
-          eyebrow="Trusted By"
-          title={<span id="our-clients-title">Trusted by Growing Businesses</span>}
+          eyebrow="Businesses That Trust Us"
+          title={<span id="our-clients-title">Our Trusted Clients</span>}
           description="We support businesses, startups, NGOs and organizations with reliable registration, compliance and consultancy services."
         />
         <div className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
