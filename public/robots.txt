@@ -4,5 +4,5 @@ Disallow: /admin/
 Disallow: /*?q=
 Disallow: /*?page=
 
-Sitemap: https://indiabusinesscare.com/sitemap.xml
-Host: indiabusinesscare.com
+Sitemap: https://www.indiabusinesscare.com/sitemap.xml
+Host: www.indiabusinesscare.com
