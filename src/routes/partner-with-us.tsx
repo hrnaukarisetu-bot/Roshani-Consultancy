@@ -19,6 +19,7 @@ import {
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { SITE } from "@/data/site";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/partner-with-us")({
   head: () => ({
@@ -30,8 +31,9 @@ export const Route = createFileRoute("/partner-with-us")({
           "Join India Business Care as a franchise, professional or referral partner and grow with our technology, training and marketing support.",
       },
       { property: "og:url", content: "/partner-with-us" },
+      ...seoHead({ title: "India Business Care Franchise & Partner Network", description: "Join India Business Care as a franchise, professional or referral partner and grow with training, technology and marketing support across India.", path: "/partner-with-us" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/partner-with-us" }],
+    links: seoHead({ title: "Partner With India Business Care", description: "Join our franchise and professional partner network.", path: "/partner-with-us" }).links,
   }),
   component: PartnerWithUs,
 });

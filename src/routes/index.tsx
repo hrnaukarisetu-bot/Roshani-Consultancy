@@ -24,6 +24,7 @@ import { Reveal } from "@/components/Reveal";
 import { getService, servicesByCategory, INDUSTRIES, type ServiceCategory } from "@/data/services";
 import { FAQS, TESTIMONIALS } from "@/data/content";
 import { SITE } from "@/data/site";
+import { seoHead } from "@/lib/seo";
 import heroImage from "@/assets/hero_img.jpeg";
 import officeImage from "@/assets/office.png";
 import { useEffect, useState } from "react";
@@ -46,8 +47,9 @@ export const Route = createFileRoute("/")({
           "Start your business legally. India Business Care offers company registration, GST, tender filing, licenses & compliance for Indian startups and MSMEs.",
       },
       { property: "og:url", content: "/" },
+      ...seoHead({ title: "India Business Care | Company Registration, GST & Tender Services", description: "Start and grow your business with expert company registration, GST, government tender, licensing, trademark and compliance support across India.", path: "/", keywords: ["company registration India", "GST consultant", "tender filing services", "business consultant Akola", "MSME registration"] }).meta,
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: seoHead({ title: "India Business Care", description: "Business registration and compliance services across India.", path: "/" }).links,
     scripts: [
       {
         type: "application/ld+json",

@@ -6,6 +6,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
 import { servicesByCategory } from "@/data/services";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/gst-taxation")({
   head: () => ({
@@ -17,8 +18,9 @@ export const Route = createFileRoute("/gst-taxation")({
           "GST registration, monthly & quarterly filing, income tax returns, audit and compliance support for Indian businesses.",
       },
       { property: "og:url", content: "/gst-taxation" },
+      ...seoHead({ title: "GST Registration & Tax Filing Services in India | IBC", description: "Expert GST registration, GST return filing, income tax returns, audits and ongoing tax compliance support for startups and businesses across India.", path: "/gst-taxation", keywords: ["GST registration India", "GST return filing", "income tax return business", "tax consultant Akola"] }).meta,
     ],
-    links: [{ rel: "canonical", href: "/gst-taxation" }],
+    links: seoHead({ title: "GST Registration & Tax Filing Services in India | IBC", description: "GST registration, filing and tax compliance support across India.", path: "/gst-taxation" }).links,
   }),
   component: Page,
 });

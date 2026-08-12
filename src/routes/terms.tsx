@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/PageHero";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/terms")({
   head: () => ({
@@ -8,8 +9,9 @@ export const Route = createFileRoute("/terms")({
       { title: "Terms & Conditions | India Business Care" },
       { name: "description", content: "Terms and conditions for services provided by India Business Care." },
       { property: "og:url", content: "/terms" },
+      ...seoHead({ title: "Terms & Conditions | India Business Care", description: "Read the terms and conditions governing consulting, registration, taxation, tender and licensing services from India Business Care.", path: "/terms" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/terms" }],
+    links: seoHead({ title: "Terms & Conditions | India Business Care", description: "Service terms for India Business Care.", path: "/terms" }).links,
   }),
   component: () => (
     <SiteLayout>

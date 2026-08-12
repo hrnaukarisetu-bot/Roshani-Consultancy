@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /*?q=
+Disallow: /*?page=
 
-Sitemap: /sitemap.xml
+Sitemap: https://indiabusinesscare.com/sitemap.xml
+Host: indiabusinesscare.com

@@ -5,6 +5,7 @@ import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { servicesByCategory } from "@/data/services";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/government-licenses")({
   head: () => ({
@@ -16,8 +17,9 @@ export const Route = createFileRoute("/government-licenses")({
           "MSME / Udyam, Shop Act, FSSAI, IEC, APEDA, professional tax and labour certification services for Indian businesses.",
       },
       { property: "og:url", content: "/government-licenses" },
+      ...seoHead({ title: "Government Licenses & Certifications in India | IBC", description: "Get MSME/Udyam, Shop Act, FSSAI, IEC, APEDA, Professional Tax and labour registrations with expert documentation support across India.", path: "/government-licenses", keywords: ["government license consultant", "Udyam registration", "FSSAI license", "IEC registration"] }).meta,
     ],
-    links: [{ rel: "canonical", href: "/government-licenses" }],
+    links: seoHead({ title: "Government Licenses & Certifications in India | IBC", description: "Expert government licence and certification support across India.", path: "/government-licenses" }).links,
   }),
   component: Page,
 });

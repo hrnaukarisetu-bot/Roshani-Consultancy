@@ -3,6 +3,7 @@ import type {} from "@tanstack/react-start";
 import { SERVICES } from "@/data/services";
 import { SITE } from "@/data/site";
 import { RESOURCES } from "@/data/content";
+import { PUBLISHED_CLIENTS } from "@/data/clients";
 
 
 interface SitemapEntry {
@@ -39,6 +40,11 @@ export const Route = createFileRoute("/sitemap.xml")({
             path: `/resources/${r.slug}`,
             changefreq: "monthly" as const,
             priority: "0.6",
+          })),
+          ...PUBLISHED_CLIENTS.map((client) => ({
+            path: `/clients/${client.slug}`,
+            changefreq: "monthly" as const,
+            priority: "0.5",
           })),
         ];
 
