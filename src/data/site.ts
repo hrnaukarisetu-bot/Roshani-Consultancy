@@ -1,6 +1,6 @@
 export const SITE = {
   name: "India Business Care",
-  url: "https://indiabusinesscare.com",
+  url: "https://www.indiabusinesscare.com",
   short: "India Business Care",
   tagline: "Helping Business & Startup MSME Build the Bharat",
   headline: "Start Your Business Legally & Professionally",
