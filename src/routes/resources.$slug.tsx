@@ -4,6 +4,8 @@ import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { getResource, RESOURCES, type Resource } from "@/data/content";
 import { ArrowRight, Clock } from "lucide-react";
+import { seoHead } from "@/lib/seo";
+import { absoluteUrl, SITE } from "@/data/site";
 
 export const Route = createFileRoute("/resources/$slug")({
   loader: ({ params }): { post: Resource } => {
@@ -15,6 +17,7 @@ export const Route = createFileRoute("/resources/$slug")({
     if (!loaderData) return { meta: [{ title: "Resource not found" }, { name: "robots", content: "noindex" }] };
     const p = loaderData.post;
     const url = `/resources/${p.slug}`;
+    const seo = seoHead({ title: `${p.title} | India Business Care`, description: p.excerpt, path: url, image: p.cover, type: "article" });
     return {
       meta: [
         { title: `${p.title} | India Business Care` },
@@ -25,8 +28,9 @@ export const Route = createFileRoute("/resources/$slug")({
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
         { name: "twitter:image", content: p.cover },
+        ...seo.meta,
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: seo.links,
       scripts: [
         {
           type: "application/ld+json",
@@ -35,8 +39,10 @@ export const Route = createFileRoute("/resources/$slug")({
             "@type": "Article",
             headline: p.title,
             description: p.excerpt,
-            image: p.cover,
-            author: { "@type": "Organization", name: "India Business Care" },
+            image: absoluteUrl(p.cover),
+            mainEntityOfPage: absoluteUrl(url),
+            author: { "@type": "Organization", name: SITE.name, url: SITE.url },
+            publisher: { "@type": "Organization", name: SITE.name, logo: { "@type": "ImageObject", url: absoluteUrl("/roshani_logo.png") } },
           }),
         },
       ],

@@ -10,6 +10,7 @@ import {
   CLIENT_SERVICES,
   PUBLISHED_CLIENTS,
 } from "@/data/clients";
+import { seoHead } from "@/lib/seo";
 
 const stringValue = (value: unknown) => (typeof value === "string" ? value : "");
 export const Route = createFileRoute("/clients")({
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/clients")({
     sort: stringValue(search.sort) || "order",
     page: Math.max(1, Number(search.page) || 1),
   }),
-  head: () => ({
+  head: ({ matches }) => matches.at(-1)?.pathname === "/clients" ? ({
     meta: [
       { title: "Our Clients | India Business Care" },
       {
@@ -37,9 +38,10 @@ export const Route = createFileRoute("/clients")({
           "Businesses supported through registration, certification, compliance and consultancy services.",
       },
       { name: "twitter:card", content: "summary_large_image" },
+      ...seoHead({ title: "Our Clients & Business Success Stories | India Business Care", description: "Explore businesses supported by India Business Care through registration, certification, compliance, tender and business consultancy services.", path: "/clients" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/clients" }],
-  }),
+    links: seoHead({ title: "Our Clients | India Business Care", description: "Businesses supported by India Business Care.", path: "/clients" }).links,
+  }) : ({}),
   component: ClientsPage,
 });
 

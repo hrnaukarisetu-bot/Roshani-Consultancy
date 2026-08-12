@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/PageHero";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/disclaimer")({
   head: () => ({
@@ -8,8 +9,9 @@ export const Route = createFileRoute("/disclaimer")({
       { title: "Disclaimer | India Business Care" },
       { name: "description", content: "Legal disclaimer for information and services provided by India Business Care." },
       { property: "og:url", content: "/disclaimer" },
+      ...seoHead({ title: "Disclaimer | India Business Care", description: "Important legal disclaimer covering information, government approvals and services provided by India Business Care.", path: "/disclaimer" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/disclaimer" }],
+    links: seoHead({ title: "Disclaimer | India Business Care", description: "Legal disclaimer for India Business Care.", path: "/disclaimer" }).links,
   }),
   component: () => (
     <SiteLayout>

@@ -87,7 +87,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Start your business legally. India Business Care offers company registration, GST, tender filing, licenses & compliance for Indian startups and MSMEs.",
       },
       { name: "author", content: "India Business Care" },
-      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { name: "googlebot", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       {
         name: "keywords",
         content:
@@ -129,6 +130,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "shortcut icon", href: "/favicon.png", type: "image/png" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "alternate", hrefLang: "en-IN", href: SITE.url },
+      { rel: "alternate", hrefLang: "x-default", href: SITE.url },
     ],
     scripts: [
       {
@@ -136,8 +139,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
+          "@id": `${SITE.url}/#organization`,
           name: SITE.name,
-          image: absoluteUrl("/roshani_logo.png"),
+          image: absoluteUrl("/social-share.png"),
+          logo: absoluteUrl("/roshani_logo.png"),
           url: SITE.url,
           telephone: "+91-8975008429",
           email: "support@indiabusinesscare.com",
@@ -149,8 +154,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             postalCode: "444001",
             addressCountry: "IN",
           },
-          areaServed: "IN",
-          priceRange: "$$",
+          areaServed: [{ "@type": "Country", name: "India" }, { "@type": "State", name: "Maharashtra" }],
+          priceRange: "₹₹",
           openingHours: "Mo-Sa 10:00-19:00",
           sameAs: [SITE.googleBusinessProfile],
           serviceType: [

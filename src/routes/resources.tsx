@@ -4,9 +4,10 @@ import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { RESOURCES } from "@/data/content";
 import { ArrowRight, Clock } from "lucide-react";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/resources")({
-  head: () => ({
+  head: ({ matches }) => matches.at(-1)?.pathname === "/resources" ? ({
     meta: [
       { title: "Resources & Knowledge Centre | India Business Care" },
       {
@@ -15,9 +16,10 @@ export const Route = createFileRoute("/resources")({
           "Practical guides on company registration, GST, tenders, MSME, FSSAI, IEC and trademark for Indian businesses.",
       },
       { property: "og:url", content: "/resources" },
+      ...seoHead({ title: "Business Registration & Compliance Guides | India Business Care", description: "Read practical guides on company registration, GST, government tenders, MSME, FSSAI, IEC and trademarks for Indian businesses.", path: "/resources" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/resources" }],
-  }),
+    links: seoHead({ title: "Business Registration & Compliance Guides", description: "Practical guides for Indian businesses.", path: "/resources" }).links,
+  }) : ({}),
   component: Resources,
 });
 

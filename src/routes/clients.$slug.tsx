@@ -6,6 +6,7 @@ import { PageHero } from "@/components/PageHero";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PUBLISHED_CLIENTS } from "@/data/clients";
 import { telLink, whatsappLink } from "@/data/site";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/clients/$slug")({
   head: ({ params }) => {
@@ -18,6 +19,8 @@ export const Route = createFileRoute("/clients/$slug")({
         ],
       };
     const description = `${client.companyName} in ${client.city}, supported with ${client.services.slice(0, 3).join(", ") || "business consultancy"} by India Business Care.`;
+    // Social crawlers inconsistently support SVG client logos, so use the reliable 1200x630 PNG.
+    const seo = seoHead({ title: `${client.companyName} Success Story | India Business Care`, description, path: `/clients/${client.slug}`, image: "/social-share.png" });
     return {
       meta: [
         { title: `${client.companyName} | Our Clients` },
@@ -25,8 +28,9 @@ export const Route = createFileRoute("/clients/$slug")({
         { property: "og:title", content: client.companyName },
         { property: "og:description", content: description },
         { property: "og:image", content: client.logo || "/roshani_logo.png" },
+        ...seo.meta,
       ],
-      links: [{ rel: "canonical", href: `/clients/${client.slug}` }],
+      links: seo.links,
     };
   },
   component: ClientDetails,

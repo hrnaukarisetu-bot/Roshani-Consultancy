@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/PageHero";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -8,8 +9,9 @@ export const Route = createFileRoute("/privacy")({
       { title: "Privacy Policy | India Business Care" },
       { name: "description", content: "How India Business Care collects, uses and protects your information." },
       { property: "og:url", content: "/privacy" },
+      ...seoHead({ title: "Privacy Policy | India Business Care", description: "Learn how India Business Care collects, uses, stores and protects client and website visitor information.", path: "/privacy" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/privacy" }],
+    links: seoHead({ title: "Privacy Policy | India Business Care", description: "How India Business Care protects your information.", path: "/privacy" }).links,
   }),
   component: () => (
     <SiteLayout>

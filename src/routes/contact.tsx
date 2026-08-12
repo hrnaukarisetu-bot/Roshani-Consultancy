@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Mail, MapPin, Clock } from "lucide-react";
 import { SITE, mailLink } from "@/data/site";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -16,8 +17,9 @@ export const Route = createFileRoute("/contact")({
           "Get in touch with India Business Care in Akola for company registration, GST, tender and licensing services. Email us or fill in the enquiry form.",
       },
       { property: "og:url", content: "/contact" },
+      ...seoHead({ title: "Contact India Business Care | Akola, Maharashtra", description: "Contact India Business Care in Akola for company registration, GST, tender filing, licensing and compliance support across India.", path: "/contact" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: seoHead({ title: "Contact India Business Care", description: "Contact our business consultants in Akola, Maharashtra.", path: "/contact" }).links,
   }),
   component: Contact,
 });

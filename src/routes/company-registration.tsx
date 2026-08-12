@@ -6,6 +6,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CompanyRegistrationPlans } from "@/components/CompanyRegistrationPlans";
 import { servicesByCategory } from "@/data/services";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/company-registration")({
   head: () => ({
@@ -17,8 +18,9 @@ export const Route = createFileRoute("/company-registration")({
           "Private Limited, LLP, OPC, Section 8, Nidhi and Farmer Producer Company registration across India â€” quick, transparent and professional.",
       },
       { property: "og:url", content: "/company-registration" },
+      ...seoHead({ title: "Company Registration Services in India | India Business Care", description: "Register a Private Limited Company, LLP, OPC, Section 8, Nidhi or Farmer Producer Company anywhere in India with expert end-to-end support.", path: "/company-registration", keywords: ["company registration India", "private limited company registration", "LLP registration"] }).meta,
     ],
-    links: [{ rel: "canonical", href: "/company-registration" }],
+    links: seoHead({ title: "Company Registration Services in India | India Business Care", description: "Register your company anywhere in India with expert end-to-end support.", path: "/company-registration" }).links,
   }),
   component: Page,
 });

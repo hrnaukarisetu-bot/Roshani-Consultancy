@@ -5,6 +5,7 @@ import { CTASection } from "@/components/CTASection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CheckCircle2, Award, Target, Eye, Heart, Sparkles, Quote } from "lucide-react";
 import founderPhoto from "@/assets/Founder photo.jpeg";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -17,8 +18,9 @@ export const Route = createFileRoute("/about")({
       },
       { property: "og:title", content: "About India Business Care" },
       { property: "og:url", content: "/about" },
+      ...seoHead({ title: "About India Business Care | Business Consultants in Akola", description: "Meet India Business Care, trusted consultants with 13+ years of experience helping Indian startups, MSMEs and contractors register, comply and grow.", path: "/about" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: seoHead({ title: "About India Business Care", description: "Trusted business consultants in Akola serving clients across India.", path: "/about" }).links,
   }),
   component: About,
 });

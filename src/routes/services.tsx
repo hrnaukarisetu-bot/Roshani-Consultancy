@@ -6,9 +6,10 @@ import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CATEGORY_LABELS, SERVICES, type ServiceCategory } from "@/data/services";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
+  head: ({ matches }) => matches.at(-1)?.pathname === "/services" ? ({
     meta: [
       { title: "Business Services | India Business Care" },
       {
@@ -17,9 +18,10 @@ export const Route = createFileRoute("/services")({
           "Explore all services from India Business Care â€” company registration, GST, tenders, licenses, trademark and compliance for Indian businesses.",
       },
       { property: "og:url", content: "/services" },
+      ...seoHead({ title: "Business Registration & Compliance Services in India | IBC", description: "Explore company registration, GST, tenders, government licenses, ISO, trademark and compliance services for startups and MSMEs across India.", path: "/services" }).meta,
     ],
-    links: [{ rel: "canonical", href: "/services" }],
-  }),
+    links: seoHead({ title: "Business Services | India Business Care", description: "Registration and compliance services for Indian businesses.", path: "/services" }).links,
+  }) : ({}),
   component: Services,
 });
 

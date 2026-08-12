@@ -6,6 +6,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { servicesByCategory } from "@/data/services";
 import { CheckCircle2 } from "lucide-react";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/tender-services")({
   head: () => ({
@@ -17,8 +18,9 @@ export const Route = createFileRoute("/tender-services")({
           "GeM, Maharashtra e-Tender, e-Procurement, PWD contractor registration, DSC and full tender filing support for contractors and vendors.",
       },
       { property: "og:url", content: "/tender-services" },
+      ...seoHead({ title: "Government Tender & GeM Consulting Services | India Business Care", description: "Get expert support for GeM registration, e-tender filing, bid documentation, DSC and government procurement opportunities across India.", path: "/tender-services", keywords: ["government tender consultant", "GeM registration", "e tender filing", "tender services India"] }).meta,
     ],
-    links: [{ rel: "canonical", href: "/tender-services" }],
+    links: seoHead({ title: "Government Tender & GeM Consulting Services | India Business Care", description: "End-to-end government tender and GeM support across India.", path: "/tender-services" }).links,
   }),
   component: Page,
 });

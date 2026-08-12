@@ -55,6 +55,11 @@ export const Route = createFileRoute("/services/$slug")({
         { name: "twitter:title", content: detail.metaTitle },
         { name: "twitter:description", content: detail.metaDescription },
         { name: "twitter:image", content: image },
+        { property: "og:image:secure_url", content: image },
+        { property: "og:image:type", content: "image/png" },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { name: "twitter:image:alt", content: `${detail.title} service by ${SITE.name}` },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
