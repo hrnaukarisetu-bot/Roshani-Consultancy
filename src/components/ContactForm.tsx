@@ -16,7 +16,7 @@ const schema = z.object({
 });
 
 type FormState = Record<string, string>;
-type Status = "idle" | "loading" | "success";
+type Status = "idle" | "loading" | "success" | "error";
 
 export function ContactForm({ defaultService, showIntro = false }: { defaultService?: string; showIntro?: boolean }) {
   const serviceOptions = useMemo(() => SERVICES.map((service) => service.title), []);
@@ -57,8 +57,12 @@ export function ContactForm({ defaultService, showIntro = false }: { defaultServ
 
     setErrors({});
     setStatus("loading");
-    await submitEnquiry(parsed.data);
-    setStatus("success");
+    try {
+      await submitEnquiry(parsed.data);
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -88,6 +92,7 @@ export function ContactForm({ defaultService, showIntro = false }: { defaultServ
           <a href={serviceWhatsappLink(selectedService)} target="_blank" rel="noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> Continue on WhatsApp</a>
         </div>
       )}
+      {status === "error" && <p className="mt-4 text-sm text-destructive" role="alert">We could not submit your inquiry. Please try again.</p>}
       <button type="submit" disabled={status === "loading"} className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy-dark focus:outline-none focus:ring-2 focus:ring-navy/30 disabled:cursor-not-allowed disabled:opacity-70">
         {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
         {status === "loading" ? "Submitting..." : "Submit Inquiry"}

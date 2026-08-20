@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check, Crown, MessageCircle, Search, ShieldCheck, Star, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { SITE } from "@/data/site";
+import { submitEnquiry } from "@/lib/enquiry";
 
 const plans = [
   {
@@ -58,29 +58,18 @@ const emptyForm: FormState = { applicantName: "", mobile: "", email: "", busines
 export function TrademarkPlans() {
   const [selectedPlan, setSelectedPlan] = useState("");
   const [form, setForm] = useState(emptyForm);
-  const [status, setStatus] = useState<"idle" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
 
   const choosePlan = (plan: string) => { setSelectedPlan(plan); setStatus("idle"); };
   const update = (field: keyof FormState, value: string) => setForm((current) => ({ ...current, [field]: value }));
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const message = [
-      "Hello India Business Care,",
-      "I would like to inquire about a trademark service.",
-      "",
-      `*Selected Plan:* ${selectedPlan}`,
-      `*Applicant Name:* ${form.applicantName}`,
-      `*Mobile Number:* ${form.mobile}`,
-      `*Email:* ${form.email}`,
-      `*Business Name:* ${form.businessName}`,
-      `*Proposed Trademark:* ${form.proposedTrademark}`,
-      `*Business Activity:* ${form.businessActivity}`,
-      `*Trademark Type:* ${form.trademarkType}`,
-    ].join("\n");
-    const whatsappUrl = `https://wa.me/${SITE.phoneRaw.replace("+", "")}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-    setStatus("success");
+    setStatus("loading");
+    try {
+      await submitEnquiry({ name: form.applicantName, phone: form.mobile, email: form.email, organizationName: form.businessName, service: "Trademark", message: `Plan: ${selectedPlan}\nTrademark: ${form.proposedTrademark}\nBusiness activity: ${form.businessActivity}\nType: ${form.trademarkType}`, selectedPlan, proposedTrademark: form.proposedTrademark, businessActivity: form.businessActivity, trademarkType: form.trademarkType, source: "trademark-plans" });
+      setStatus("success");
+    } catch { setStatus("idle"); alert("We could not submit your inquiry. Please try again."); }
   }
 
   return (
@@ -130,7 +119,7 @@ export function TrademarkPlans() {
           <DialogTitle className="text-2xl font-bold text-navy-dark">Trademark Plan Inquiry</DialogTitle>
           <DialogDescription>Share your details and our trademark expert will contact you.</DialogDescription>
           {status === "success" ? (
-            <div className="py-14 text-center"><MessageCircle className="mx-auto h-14 w-14 rounded-full bg-emerald-100 p-3 text-emerald-600" /><h3 className="mt-4 text-xl font-bold text-navy-dark">WhatsApp opened</h3><p className="mt-2 text-sm text-muted-foreground">Please review the pre-filled message and tap Send in WhatsApp.</p><button type="button" onClick={() => { setStatus("idle"); setForm(emptyForm); setSelectedPlan(""); }} className="mt-6 text-sm font-bold text-orange hover:underline">Close</button></div>
+            <div className="py-14 text-center"><MessageCircle className="mx-auto h-14 w-14 rounded-full bg-emerald-100 p-3 text-emerald-600" /><h3 className="mt-4 text-xl font-bold text-navy-dark">Inquiry submitted</h3><p className="mt-2 text-sm text-muted-foreground">Thank you. Our trademark expert will contact you shortly.</p><button type="button" onClick={() => { setStatus("idle"); setForm(emptyForm); setSelectedPlan(""); }} className="mt-6 text-sm font-bold text-orange hover:underline">Close</button></div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-4 grid gap-4 sm:grid-cols-2">
               <FormField label="Selected Plan"><input value={selectedPlan} readOnly className="field bg-muted" /></FormField>
@@ -141,7 +130,7 @@ export function TrademarkPlans() {
               <FormField label="Proposed Trademark"><input required value={form.proposedTrademark} onChange={(e) => update("proposedTrademark", e.target.value)} className="field" /></FormField>
               <FormField label="Business Activity"><input required value={form.businessActivity} onChange={(e) => update("businessActivity", e.target.value)} className="field" /></FormField>
               <FormField label="Trademark Type"><select value={form.trademarkType} onChange={(e) => update("trademarkType", e.target.value)} className="field"><option>Wordmark</option><option>Logo</option><option>Both</option></select></FormField>
-              <div className="sm:col-span-2"><button className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#20bd5a]"><MessageCircle className="h-5 w-5" />Send Inquiry on WhatsApp</button><p className="mt-3 text-center text-xs text-muted-foreground">WhatsApp will open with your inquiry details. Review the message and tap Send.</p></div>
+              <div className="sm:col-span-2"><button disabled={status === "loading"} className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-bold text-white transition hover:bg-navy-dark disabled:opacity-70"><MessageCircle className="h-5 w-5" />{status === "loading" ? "Submitting..." : "Submit Inquiry"}</button></div>
             </form>
           )}
         </DialogContent>

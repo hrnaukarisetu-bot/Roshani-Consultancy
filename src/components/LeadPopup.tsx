@@ -66,16 +66,21 @@ export function LeadPopup() {
     }
 
     setStatus("loading");
-    await submitEnquiry({
-      ...parsed.data,
-      email: "",
-      organizationName: "",
-      service: parsed.data.field,
-      message: `Lead popup enquiry from ${parsed.data.city}. Business field: ${parsed.data.field}`,
-      source: "lead-popup",
-    });
-    setStatus("success");
-    window.setTimeout(() => setOpen(false), 1800);
+    try {
+      await submitEnquiry({
+        ...parsed.data,
+        email: "",
+        organizationName: "",
+        service: parsed.data.field,
+        message: `Lead popup enquiry from ${parsed.data.city}. Business field: ${parsed.data.field}`,
+        source: "lead-popup",
+      });
+      setStatus("success");
+      window.setTimeout(() => setOpen(false), 1800);
+    } catch {
+      setStatus("idle");
+      alert("We could not submit your inquiry. Please try again.");
+    }
   };
 
   return (
