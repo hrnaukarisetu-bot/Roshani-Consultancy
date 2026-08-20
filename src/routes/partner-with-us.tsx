@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PageHero } from "@/components/PageHero";
-import { SITE } from "@/data/site";
+import { submitEnquiry } from "@/lib/enquiry";
 import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/partner-with-us")({
@@ -156,16 +156,14 @@ function PartnerWithUs() {
 }
 
 function PartnerForm({ selectedProgram, setSelectedProgram }: { selectedProgram: string; setSelectedProgram: (value: string) => void }) {
-  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const message = [
-      "Hello India Business Care, I would like to apply as a partner.", "",
-      `Name: ${form.get("name")}`, `Mobile: ${form.get("mobile")}`, `Email: ${form.get("email")}`,
-      `State: ${form.get("state")}`, `City: ${form.get("city")}`, `Interested In: ${form.get("program")}`,
-      `Profession: ${form.get("profession")}`,
-    ].join("\n");
-    window.open(`https://wa.me/${SITE.phoneRaw.replace("+", "")}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    try {
+      await submitEnquiry({ name: String(form.get("name")), phone: String(form.get("mobile")), email: String(form.get("email")), organizationName: String(form.get("profession")), service: "Partner Application", message: `Program: ${form.get("program")}\nState: ${form.get("state")}\nCity: ${form.get("city")}\nProfession: ${form.get("profession")}`, program: String(form.get("program")), state: String(form.get("state")), city: String(form.get("city")), profession: String(form.get("profession")), source: "partner-with-us" });
+      event.currentTarget.reset();
+      alert("Your partnership application has been submitted.");
+    } catch { alert("We could not submit your application. Please try again."); }
   };
 
   return (
@@ -174,7 +172,7 @@ function PartnerForm({ selectedProgram, setSelectedProgram }: { selectedProgram:
         <div>
           <p className="text-xs font-bold uppercase tracking-wider text-orange">Take the Next Step</p>
           <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Become a Partner</h2>
-          <p className="mt-4 max-w-xl leading-relaxed text-white/80">Complete the form and continue on WhatsApp. Our partnership team will review your details and contact you to discuss the next steps.</p>
+          <p className="mt-4 max-w-xl leading-relaxed text-white/80">Complete the form and our partnership team will review your details and contact you to discuss the next steps.</p>
           <div className="mt-7 flex items-center gap-3 text-sm text-white/90"><Handshake className="h-5 w-5 text-orange" />Let us build and grow together.</div>
         </div>
         <form onSubmit={submit} className="grid gap-4 rounded-3xl bg-white p-5 text-ink shadow-xl sm:grid-cols-2 sm:p-8">
@@ -190,7 +188,7 @@ function PartnerForm({ selectedProgram, setSelectedProgram }: { selectedProgram:
           </Field>
           <div className="sm:col-span-2"><Field label="Profession / Business Type"><select name="profession" required defaultValue="" className="field"><option value="" disabled>Select your profession</option>{professionals.map((item) => <option key={item}>{item}</option>)}</select></Field></div>
           <label className="flex items-start gap-3 text-xs leading-relaxed text-muted-foreground sm:col-span-2"><input required type="checkbox" className="mt-0.5 h-4 w-4 accent-orange" /><span>I agree to be contacted by India Business Care regarding this partnership application.</span></label>
-          <div className="sm:col-span-2"><button type="submit" className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-orange px-6 py-3 text-sm font-bold text-white transition hover:brightness-110">Submit Partnership Application<ArrowRight className="h-4 w-4" /></button><p className="mt-3 text-center text-xs text-muted-foreground">Your details will be placed in a WhatsApp message. You control the final send.</p></div>
+          <div className="sm:col-span-2"><button type="submit" className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-orange px-6 py-3 text-sm font-bold text-white transition hover:brightness-110">Submit Partnership Application<ArrowRight className="h-4 w-4" /></button><p className="mt-3 text-center text-xs text-muted-foreground">Your details are sent securely to our partnership team.</p></div>
         </form>
       </div>
     </section>
